@@ -1,18 +1,27 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Login from './Login';
+import HomePageContainer from './HomePageContainer';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      loggedIn: true,
+      userId: 1
+    }
+  }
+  setLoggedIn = (id) => {
+    console.log(id);
+    this.setState({loggedIn: true, userId: id});
+  }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        {this.state.loggedIn ?
+          <HomePageContainer userId={this.state.userId} />:
+          <Login setLoggedIn={this.setLoggedIn}/>    
+        }
       </div>
     );
   }
