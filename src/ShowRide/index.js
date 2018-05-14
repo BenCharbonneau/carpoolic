@@ -8,7 +8,7 @@ class ShowRide extends Component {
 			ride: {},
 			driver: {},
 			passengers: [],
-			fields: ['name','pickup','destination','pickup_time','driver','passengers','delete','edit']
+			fields: ['name','pickup','destination','pickup_time','driver','passengers','delete','edit','slots']
 		}
 	}
 	componentDidMount() {
@@ -79,6 +79,7 @@ class ShowRide extends Component {
 		    	{ fields.includes('pickup') ? <p>Pickup Location: {ride.pickup}</p> : '' }
 		    	{ fields.includes('destination') ? <p>Destination: {ride.destination}</p> : '' }
 		    	{ fields.includes('pickup_time') ? <p>Pickup Time: {ride.pickup_date} {ride.pickup_time}</p> : '' }
+		    	{ fields.includes('passengers') ? <p>Available Seats: {ride.passenger_slots}</p> : '' }
 		    	{ fields.includes('driver') ? <p>Driver: {driver}</p> : '' }
 		    	{ fields.includes('passengers') ? <div><p>Passengers:</p><ul>{passengers}</ul></div> : '' }
 		    	{ fields.includes('delete') && (driver === "You") ? <DeleteButton id={ride.id} reState={this.getRide} /> : '' }
