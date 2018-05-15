@@ -1,7 +1,6 @@
 import React from 'react';
-import Banner from '../Banner';
 import UserRideList from '../UserRideList';
-
+import Banner from '../Banner';
 
 function HomePageContainer({userId}) {
   return (

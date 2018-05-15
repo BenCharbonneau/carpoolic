@@ -9,10 +9,10 @@ const delRide = async (reState,e) => {
 	reState();
 }
 
-function DeleteButton({id, reState}) {
+function DeleteRide({id, reState}) {
 	return (
 		<button id={id} onClick={delRide.bind(null,reState)}>Cancel</button>
 	);
 }
 
-export default DeleteButton;
+export default DeleteRide;

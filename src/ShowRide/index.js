@@ -10,7 +10,7 @@ class ShowRide extends Component {
 			ride: {},
 			driver: {},
 			passengers: [],
-			fields: ['name','pickup','destination','pickup_time','driver','passengers','delete','edit','slots']
+			fields: ['name','pickup','destination','pickup_time','driver','passengers','delete','edit','ok']
 		}
 	}
 	componentDidMount() {
@@ -36,26 +36,23 @@ class ShowRide extends Component {
 		})
 
 		const ride = await rideJSON.json();
-		console.log(ride, " this is ride from show ride")
+		
+		const users = ride.passenger_ids;
 
-		//const users = fetch
+		const driver = users.find((user) => {
+			return user.id === ride.found_ride.driver_user_id
+		})
 
-		// const users = [{id:1,name:'Ben'},{id:2,name:'Jim'}];
+		const passengers = users.filter((user) => {
+			return user !== driver;
+		})
 
-		// const driver = users.find((user) => {
-		// 	return user.id === ride.ride.driver_user_id
-		// })
-
-		// const passengers = users.filter((user) => {
-		// 	return user !== driver;
-		// })
-
-		// this.setState({ride: ride.ride, driver: driver, passengers: passengers});
+		this.setState({ride: ride.found_ride, driver: driver, passengers: passengers});
 	}
 	render() {
 		const ride = this.state.ride
 		const fields = this.state.fields;
-		const driver = (ride.driver_user_id === this.props.userId) ? "You" : this.state.driver.name
+		const driver = (ride.driver_user_id === this.props.userId) ? "You" : this.state.driver.username
 		const passengers = this.state.passengers.map((passenger) => {
 			return (
 				<li key={passenger.id}>
@@ -76,7 +73,7 @@ class ShowRide extends Component {
 		    	{ fields.includes('passengers') ? <div><p>Passengers:</p><ul>{passengers}</ul></div> : '' }
 		    	{ fields.includes('edit') && (driver === "You") ? <EditButton rideId={ride.id} close={this.getRide} btnText="Edit" /> : '' }
 		    	{ fields.includes('delete') && (driver === "You") ? <DeleteRide id={ride.id} reState={this.props.close} /> : '' }
-		    	{ this.props.close ? <button onClick={this.props.close}>OK</button> : '' }
+		    	{ fields.includes('ok') ? <button onClick={this.props.close}>OK</button> : '' }
 		    </div>
 	    );
 	}

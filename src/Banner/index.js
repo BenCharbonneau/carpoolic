@@ -1,28 +1,41 @@
-import React from 'react';
+import React,{Component} from 'react';
 import EditButton from '../EditButton';
+import CreateRide from '../CreateRide';
+import Modal from '../Modal';
 
-const showCreate = () => {
-	
-}
+class Banner extends Component {
+	constructor() {
+		super();
+		this.state = {
+			modalClass: 'closed'
+		}
+	}
+	showCreate = () => {
+		this.setState({modalClass: 'open'})
+	}
+	hideCreate = () => {
+		this.setState({modalClass: 'closed'})
+	}
+	showSearch = () => {
+		
+	}
+	logout = () => {
+		
+	}
+	render() {
+		const createComp = <CreateRide close={this.hideCreate} />
 
-const showHome = () => {
-	
-}
-
-const logout = () => {
-	
-}
-
-function Banner({id, title}) {
-	return (
-		<div id="container">
-			<button onClick={showCreate}>Create Ride</button>
-			<button onClick={showHome}>Home</button>
-			<h1>{title}</h1>
-			<EditButton btnText="Edit Account" userId={id}/>
-			<button onClick={logout} >Logout</button>
-		</div>
-	);
+		return (
+			<div id="container">
+				<button onClick={this.showCreate}>Create Ride</button>
+				<button onClick={this.showSearch}>Search for Rides</button>
+				<h1>{this.props.title}</h1>
+				<EditButton btnText="Edit Account" userId={this.props.id}/>
+				<button onClick={this.logout} >Logout</button>
+				<Modal cssClass={this.state.modalClass} comp={createComp}/>
+			</div>
+		);
+	}
 }
 
 export default Banner;
