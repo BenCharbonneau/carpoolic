@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-// import ShowRide from '../ShowRide';
+import ShowRide from '../ShowRide';
 
-class RideList extends Component {
+class UserRideList extends Component {
   constructor() {
     super();
     this.state = {
@@ -14,7 +14,10 @@ class RideList extends Component {
     })
   }
   getRides = async () => {
-   const ridesJSON = await fetch('http://localhost:9292/rides', {
+
+    userId = 
+
+   const ridesJSON = await fetch('http://localhost:9292/' + userId + '/rides', {
       credentials: 'include'
       // body: JSON.stringify({
       //   username: username,
@@ -45,10 +48,10 @@ class RideList extends Component {
 
     return (
       <div>
-        <ul>{rideList}</ul>
+        <ShowRide userId={this.props.userId} fields={['name','pickup','destination','pickup_time','driver','delete']} rideId={1}/>
       </div>
     );
   }
 }
-
-export default RideList;
+//<ul>{rideList}</ul>
+export default UserRideList;

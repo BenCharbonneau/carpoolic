@@ -27,39 +27,28 @@ class ShowRide extends Component {
 		})
 	}
 	getRide = async () => {
-		// const rideJSON = await fetch('database rides/'+this.props.rideId,{
-		// 	credentials: 'include'
-		// })
+		// const rideId = 
 
-		// const ride = await rideJSON.json();
+		const rideJSON = await fetch('http://localhost:9292/rides/' + 1, {
+			credentials: 'include'
+		})
 
-		// const ride = {
-		// 	success: true,
-		// 	ride: {
-		// 		id: 1,
-		// 		name: 'Awesome sauce, the ride',
-		// 		pickup: 'Wrigley',
-		// 		destination: 'Soldier Field',
-		// 		pickup_date: '1/1/2019',
-		// 		pickup_time: '6:00 AM',
-		// 		driver_user_id: 1,
-		// 		passenger_slots: 4
-		// 	}
-		// }
+		const ride = await rideJSON.json();
+		console.log(ride, " this is ride from show ride")
 
 		//const users = fetch
 
-		const users = [{id:1,name:'Ben'},{id:2,name:'Jim'}];
+		// const users = [{id:1,name:'Ben'},{id:2,name:'Jim'}];
 
-		const driver = users.find((user) => {
-			return user.id === ride.ride.driver_user_id
-		})
+		// const driver = users.find((user) => {
+		// 	return user.id === ride.ride.driver_user_id
+		// })
 
-		const passengers = users.filter((user) => {
-			return user !== driver;
-		})
+		// const passengers = users.filter((user) => {
+		// 	return user !== driver;
+		// })
 
-		this.setState({ride: ride.ride, driver: driver, passengers: passengers});
+		// this.setState({ride: ride.ride, driver: driver, passengers: passengers});
 	}
 	render() {
 		const ride = this.state.ride
