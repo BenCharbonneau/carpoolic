@@ -57,7 +57,7 @@ class CreateRide extends Component {
 		let body = {};
 		for (let label of labels) {
 			input = label.children[0]
-			if (input.name) {
+			if (input && input.name) {
 				body[input.name] = input.value;
 				//input.value = "";
 			}

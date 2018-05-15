@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DeleteButton from '../DeleteButton';
+import RemovePassButton from '../RemovePassButton';
 
 class EditRide extends Component {
 	constructor() {
@@ -61,12 +62,19 @@ class EditRide extends Component {
 		this.setState({ride: ride.ride, driver: driver, passengers: passengers});
 	}
 	handleSubmit = (e) => {
+		e.preventDefault();
+
+		const submitElem = document.activeElement
+		if (submitElem.tagName === 'BUTTON' && submitElem.innerText === 'X') {
+			return false;
+		}
+
 		const labels = e.currentTarget.children;
 		let input;
 		let body = {};
 		for (let label of labels) {
 			input = label.children[0]
-			if (input.name && ! input.disabled) {
+			if (input && input.name && !input.disabled) {
 				body[input.name] = input.value;
 			}
 		}
@@ -82,6 +90,7 @@ class EditRide extends Component {
 			return (
 				<li key={passenger.id}>
 					{passenger.name}
+					<RemovePassButton id={passenger.id} reState={this.props.close} />
 				</li>
 			);
 		})
