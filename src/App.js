@@ -1,43 +1,38 @@
 import React, { Component } from 'react';
 import './App.css';
 import Login from './Login';
-import HomePageContainer from './HomePageContainer';
-import RideSearchContainer from './RideSearchContainer';
+import HomePage from './HomePage';
+import SearchPage from './SearchPage';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       loggedIn: true,
-      userId: 1
+      userId: 1,
+      page: ''
     }
   }
   setLoggedIn = (id) => {
     console.log(id);
     this.setState({loggedIn: true, userId: id});
   }
-
-getRides = async () => {
-  const ridesJSON = await fetch('http://localhost:9292/rides', {
-    credentials: 'include'
-    // body: JSON.stringify({
-    //   username: username,
-    //   password: password
-    // })
-  });
- 
-  const rides = await ridesJSON.json();
-  const available_rides = rides.retrieved_rides
-  console.log(available_rides)
-  return available_rides;
-}
+  showSearch = () => {
+    this.setState({page: 'search'})
+  }
+  showHome = () => {
+    this.setState({page: ''})
+  }
   render() {
+
+    const page = this.state.page ? <SearchPage showHome={this.showHome} userId={this.state.userId} /> : 
+    <HomePage showSearch={this.showSearch} userId={this.state.userId} />
+
     return (
       <div className="App">
         {this.state.loggedIn ?
           <div>
-            <HomePageContainer userId={this.state.userId} />
-            <RideSearchContainer getRides={this.getRides} />
+            {page}
           </div>:
           <Login setLoggedIn={this.setLoggedIn}/>    
         }

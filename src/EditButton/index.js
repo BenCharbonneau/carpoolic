@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import EditRide from '../EditRide';
 import EditUser from '../EditUser';
+import Modal from '../Modal';
 
 class EditButton extends Component {
 	constructor() {
@@ -12,11 +13,15 @@ class EditButton extends Component {
 	showEdit = () => {
 		this.setState({show: true})
 	}
+	hideEdit = () => {
+		this.setState({show: false})
+	}
 	render() {
 
 		let comp;
 		if (this.state.show) {
-			comp = this.props.rideId ? <EditRide id={this.props.rideId} close={this.props.close}/> : <EditUser id={this.props.userId} close={this.props.close}/>
+			comp = this.props.rideId ? <EditRide id={this.props.rideId} close={this.hideEdit}/> : <EditUser id={this.props.userId} close={this.hideEdit}/>
+			comp = <Modal comp={comp} cssClass="open"/>
 		}
 		else {
 			comp = (<button onClick={this.showEdit}>{this.props.btnText}</button>)

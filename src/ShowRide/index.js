@@ -10,7 +10,7 @@ class ShowRide extends Component {
 			ride: {},
 			driver: {},
 			passengers: [],
-			fields: ['name','pickup','destination','pickup_time','driver','passengers','delete','edit','slots']
+			fields: ['name','pickup','destination','pickup_time','driver','passengers','delete','edit','ok']
 		}
 	}
 	componentDidMount() {
@@ -36,8 +36,7 @@ class ShowRide extends Component {
 		})
 
 		const ride = await rideJSON.json();
-		console.log(ride, " this is ride from show ride")
-
+		
 		const users = ride.passenger_ids;
 
 		const driver = users.find((user) => {
@@ -57,7 +56,7 @@ class ShowRide extends Component {
 
 		const ride = this.state.ride
 		const fields = this.state.fields;
-		
+
 		const driver = (ride.driver_user_id === this.props.userId) ? "You" : this.state.driver.username
 		const passengers = this.state.passengers.map((passenger) => {
 			return (
@@ -80,7 +79,7 @@ class ShowRide extends Component {
 		    	{ fields.includes('passengers') ? <div><p>Passengers:</p><ul>{passengers}</ul></div> : '' }
 		    	{ fields.includes('edit') && (driver === "You") ? <EditButton rideId={ride.id} close={this.getRide} btnText="Edit" /> : '' }
 		    	{ fields.includes('delete') && (driver === "You") ? <DeleteRide id={ride.id} reState={this.props.close} /> : '' }
-		    	{ this.props.close ? <button onClick={this.props.close}>OK</button> : '' }
+		    	{ fields.includes('ok') ? <button onClick={this.props.close}>OK</button> : '' }
 		    </div>
 	    );
 	}
