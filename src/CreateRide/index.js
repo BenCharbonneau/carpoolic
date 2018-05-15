@@ -51,6 +51,31 @@ class CreateRide extends Component {
 
 		this.setState({autoCompUsers: autoCompUsers, driverInpLength: name.length});
 	}
+	handleSubmit = (e) => {
+		const labels = e.currentTarget.children;
+		let input;
+		let body = {};
+		for (let label of labels) {
+			input = label.children[0]
+			if (input.name) {
+				body[input.name] = input.value;
+				//input.value = "";
+			}
+		}
+		
+		const driverInp = document.getElementById('driver')
+		const driverUsrnm = driverInp.value;
+		//driverInp.value = "";
+		const driver = this.state.users.find((user) => {
+			return user.username === driverUsrnm
+		})
+
+		body['driver_user_id'] = driver.id;
+
+		//await fetch POST
+
+		this.props.close();
+	}
 	saveDriverValue = (e) => {
 		console.log(e.currentTarget.children);
 
@@ -59,7 +84,6 @@ class CreateRide extends Component {
 		this.setState({autoCompUsers: [], driverInpLength: 0})
 	}
 	clearAutoComp = (e) => {
-		console.log(e.target);
 		if (e.target.id !== 'driver') {
 			this.setState({autoCompUsers: [], driverInpLength: 0})
 		}
@@ -79,7 +103,7 @@ class CreateRide extends Component {
 		autoComp = ( <div className="autocomplete-items">{autoComp}</div>)
 
 		return (
-			<form onClick={this.clearAutoComp}>
+			<form onClick={this.clearAutoComp} onSubmit={this.handleSubmit}>
 				<h3>Create your ride</h3>
 				<label>Ride name:
 					<input name="name" type="text" placeholder="Ride name"/>

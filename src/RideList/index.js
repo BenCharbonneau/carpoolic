@@ -39,7 +39,7 @@ class RideList extends Component {
     const rides = this.state.rides.map((ride) => {
       return (
         <li key={ride.id}>
-          <ShowRide userId={this.props.userId} fields={['name','pickup','destination','pickup_time','driver','delete']} rideId={ride.id}/>
+          <ShowRide userId={this.props.userId} fields={['name','pickup','destination','pickup_time','driver','delete','edit']} rideId={ride.id}/>
         </li>
       );
     })

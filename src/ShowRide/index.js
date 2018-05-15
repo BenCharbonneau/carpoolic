@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DeleteButton from '../DeleteButton';
+import EditButton from '../EditButton';
 
 class ShowRide extends Component {
 	constructor() {
@@ -82,7 +83,9 @@ class ShowRide extends Component {
 		    	{ fields.includes('passengers') ? <p>Available Seats: {ride.passenger_slots}</p> : '' }
 		    	{ fields.includes('driver') ? <p>Driver: {driver}</p> : '' }
 		    	{ fields.includes('passengers') ? <div><p>Passengers:</p><ul>{passengers}</ul></div> : '' }
-		    	{ fields.includes('delete') && (driver === "You") ? <DeleteButton id={ride.id} reState={this.getRide} /> : '' }
+		    	{ fields.includes('edit') ? <EditButton rideId={ride.id} close={this.getRide} /> : '' }
+		    	{ fields.includes('delete') && (driver === "You") ? <DeleteButton id={ride.id} reState={this.props.close} /> : '' }
+		    	{ this.props.close ? <button onClick={this.props.close}>OK</button> : '' }
 		    </div>
 	    );
 	}
