@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ShowRide from '../ShowRide';
+// import ShowRide from '../ShowRide';
 
 class RideList extends Component {
   constructor() {
@@ -14,39 +14,38 @@ class RideList extends Component {
     })
   }
   getRides = async () => {
-   // const ridesJSON = await fetch('database users/id/rides',{
-    //  credentials: 'include',
-    //  body: JSON.stringify({
-    //    username: username,
-    //    password: password
-    //  })
-    // });
+   const ridesJSON = await fetch('http://localhost:9292/rides', {
+      credentials: 'include'
+      // body: JSON.stringify({
+      //   username: username,
+      //   password: password
+      // })
+    });
 
-    //const rides = ridesJSON.json();
-
-    const rides = {
-      success: true,
-      rides: [
-        {id: 1, name: 'Awesome ride to the moon', driver_user_id: 1, pickup: 'Wrigley', destination: 'Soldier Field', pickup_date: '1/1/2019', pickup_time: '6:00 AM'},
-        {id: 2, name: 'A ride on the crazy train.', driver_user_id: 2, pickup: 'Wrigley', destination: 'Soldier Field', pickup_date: '1/1/2019', pickup_time: '6:00 AM'}
-      ]
-    }
-
-    this.setState({ rides: rides.rides});
+    const rides = await ridesJSON.json();
+    const available_rides = rides.retrieved_rides
+    console.log(available_rides)
+    this.setState({rides: available_rides});
   }
+   //<ShowRide userId={this.props.userId} fields={['name','pickup','destination','pickup_time','driver','delete']} rideId={ride.id}/>
   render() {
 
-    const rides = this.state.rides.map((ride) => {
+    const rideList = this.state.rides.map((ride) => {
       return (
         <li key={ride.id}>
-          <ShowRide userId={this.props.userId} fields={['name','pickup','destination','pickup_time','driver','delete']} rideId={ride.id}/>
+          ride description: {ride.name} <br />
+          ride destination: {ride.destination} <br />
+          available seats: {ride.passenger_slots} <br />
+          pickup date: {ride.pickup_date} <br />
+          pickup time: {ride.pickup_time} <br />
+          pickup location: {ride.pickup} <br />
         </li>
       );
     })
 
     return (
       <div>
-        <ul>{rides}</ul>
+        <ul>{rideList}</ul>
       </div>
     );
   }

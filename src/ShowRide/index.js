@@ -33,19 +33,19 @@ class ShowRide extends Component {
 
 		// const ride = await rideJSON.json();
 
-		const ride = {
-			success: true,
-			ride: {
-				id: 1,
-				name: 'Awesome sauce, the ride',
-				pickup: 'Wrigley',
-				destination: 'Soldier Field',
-				pickup_date: '1/1/2019',
-				pickup_time: '6:00 AM',
-				driver_user_id: 1,
-				passenger_slots: 4
-			}
-		}
+		// const ride = {
+		// 	success: true,
+		// 	ride: {
+		// 		id: 1,
+		// 		name: 'Awesome sauce, the ride',
+		// 		pickup: 'Wrigley',
+		// 		destination: 'Soldier Field',
+		// 		pickup_date: '1/1/2019',
+		// 		pickup_time: '6:00 AM',
+		// 		driver_user_id: 1,
+		// 		passenger_slots: 4
+		// 	}
+		// }
 
 		//const users = fetch
 
