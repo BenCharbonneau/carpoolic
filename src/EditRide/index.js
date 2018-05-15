@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DeleteButton from '../DeleteButton';
+import DeleteRide from '../DeleteRide';
 import RemovePassButton from '../RemovePassButton';
 
 class EditRide extends Component {
@@ -90,7 +90,7 @@ class EditRide extends Component {
 			return (
 				<li key={passenger.id}>
 					{passenger.name}
-					<RemovePassButton id={passenger.id} reState={this.props.close} />
+					<RemovePassButton id={passenger.id} reState={this.getRide} />
 				</li>
 			);
 		})
@@ -128,7 +128,7 @@ class EditRide extends Component {
 					</label>
 					<input type="submit" value="Submit Updates" />
 				</form>
-				<DeleteButton id={ride.id} reState={this.props.close} />
+				<DeleteRide id={ride.id} reState={this.props.close} />
 			</div>
 		);
 	}

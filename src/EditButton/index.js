@@ -19,7 +19,7 @@ class EditButton extends Component {
 			comp = this.props.rideId ? <EditRide id={this.props.rideId} close={this.props.close}/> : <EditUser id={this.props.userId} close={this.props.close}/>
 		}
 		else {
-			comp = (<button onClick={this.showEdit}>Edit</button>)
+			comp = (<button onClick={this.showEdit}>{this.props.btnText}</button>)
 		}
 		
 		return (

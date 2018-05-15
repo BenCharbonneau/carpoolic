@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import DeleteButton from '../DeleteButton';
+import DeleteRide from '../DeleteRide';
 import EditButton from '../EditButton';
+import RemovePassButton from '../RemovePassButton';
 
 class ShowRide extends Component {
 	constructor() {
@@ -70,6 +71,7 @@ class ShowRide extends Component {
 			return (
 				<li key={passenger.id}>
 					{passenger.name}
+					{(this.props.userId === passenger.id) ? <RemovePassButton id={passenger.id} reState={this.getRide} /> : '' }
 				</li>
 			);
 		})
@@ -83,8 +85,8 @@ class ShowRide extends Component {
 		    	{ fields.includes('passengers') ? <p>Available Seats: {ride.passenger_slots}</p> : '' }
 		    	{ fields.includes('driver') ? <p>Driver: {driver}</p> : '' }
 		    	{ fields.includes('passengers') ? <div><p>Passengers:</p><ul>{passengers}</ul></div> : '' }
-		    	{ fields.includes('edit') ? <EditButton rideId={ride.id} close={this.getRide} /> : '' }
-		    	{ fields.includes('delete') && (driver === "You") ? <DeleteButton id={ride.id} reState={this.props.close} /> : '' }
+		    	{ fields.includes('edit') && (driver === "You") ? <EditButton rideId={ride.id} close={this.getRide} btnText="Edit" /> : '' }
+		    	{ fields.includes('delete') && (driver === "You") ? <DeleteRide id={ride.id} reState={this.props.close} /> : '' }
 		    	{ this.props.close ? <button onClick={this.props.close}>OK</button> : '' }
 		    </div>
 	    );
