@@ -10,7 +10,7 @@ const delRide = async (reState,e) => {
 	});
 
 	const response = await cancelRide.json();
-	console.log(reState, " in delRide")
+
 	reState();
 }
 catch (err) {
@@ -18,11 +18,11 @@ catch (err) {
 }
 }
 
-function DeleteButton({id, reState}) {
-	console.log(reState, " in DeleteButton")
+function DeleteRide({id, reState}) {
+
 	return (
 		<button id={id} onClick={delRide.bind(null,reState)}>Cancel</button>
 	);
 }
 
-export default DeleteButton;
+export default DeleteRide;

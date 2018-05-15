@@ -49,10 +49,12 @@ class ShowRide extends Component {
 		})
 
 		console.log(driver, " this is driver from state")
+		console.log(ride.found_ride.pickup_time, " this is pickup_time")
 
 		this.setState({ride: ride.found_ride, driver: driver, passengers: passengers});
 	}
 	render() {
+
 		const ride = this.state.ride
 		const fields = this.state.fields;
 		
@@ -67,6 +69,7 @@ class ShowRide extends Component {
 		})
 
 		return (
+
 			<div>
 				{ fields.includes('name') ? <p><strong>{ride.name}</strong></p> : '' }
 		    	{ fields.includes('pickup') ? <p>Pickup Location: {ride.pickup}</p> : '' }
