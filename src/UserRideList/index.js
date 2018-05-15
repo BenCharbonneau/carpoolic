@@ -15,9 +15,9 @@ class UserRideList extends Component {
   }
   getUserRides = async () => {
 
-    userId = 
+    const userId = this.props.userId;
 
-   const ridesJSON = await fetch('http://localhost:9292/' + userId + '/rides', {
+   const ridesJSON = await fetch('http://localhost:9292/users/' + userId + '/rides', {
       credentials: 'include'
       // body: JSON.stringify({
       //   username: username,
@@ -33,17 +33,17 @@ class UserRideList extends Component {
    
   render() {
 
-    const UserRideList = this.state.rides.map((ride) => {
+    const rides = this.state.rides.map((ride) => {
       return (
         <li key={ride.id}>
-          
+          <ShowRide userId={this.props.userId} fields={['name','pickup','destination','pickup_time','driver','delete']} rideId={ride.id}/>
         </li>
       );
     })
 
     return (
       <div>
-        <ShowRide userId={this.props.userId} fields={['name','pickup','destination','pickup_time','driver','delete']} rideId={1}/>
+        <ul>{rides}</ul>
       </div>
     );
   }

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
 const RideSearch = (props) => {
-  
+  if (!props.rides) {
+    return <div></div>;
+  }
   const rideList = props.rides.map((ride) => {
     return (
       <li key={ride.id}>

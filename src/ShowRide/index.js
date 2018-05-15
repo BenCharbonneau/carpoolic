@@ -29,33 +29,34 @@ class ShowRide extends Component {
 		})
 	}
 	getRide = async () => {
-		// const rideId = 
+		const rideId = this.props.rideId;
 
-		const rideJSON = await fetch('http://localhost:9292/rides/' + 1, {
+		const rideJSON = await fetch('http://localhost:9292/rides/' + rideId, {
 			credentials: 'include'
 		})
 
 		const ride = await rideJSON.json();
 		console.log(ride, " this is ride from show ride")
 
-		//const users = fetch
+		const users = ride.passenger_ids;
 
-		// const users = [{id:1,name:'Ben'},{id:2,name:'Jim'}];
+		const driver = users.find((user) => {
+			return user.id === ride.found_ride.driver_user_id
+		})
 
-		// const driver = users.find((user) => {
-		// 	return user.id === ride.ride.driver_user_id
-		// })
+		const passengers = users.filter((user) => {
+			return user !== driver;
+		})
 
-		// const passengers = users.filter((user) => {
-		// 	return user !== driver;
-		// })
+		console.log(driver, " this is driver from state")
 
-		// this.setState({ride: ride.ride, driver: driver, passengers: passengers});
+		this.setState({ride: ride.found_ride, driver: driver, passengers: passengers});
 	}
 	render() {
 		const ride = this.state.ride
 		const fields = this.state.fields;
-		const driver = (ride.driver_user_id === this.props.userId) ? "You" : this.state.driver.name
+		
+		const driver = (ride.driver_user_id === this.props.userId) ? "You" : this.state.driver.username
 		const passengers = this.state.passengers.map((passenger) => {
 			return (
 				<li key={passenger.id}>
