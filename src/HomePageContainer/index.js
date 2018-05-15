@@ -1,5 +1,5 @@
 import React from 'react';
-import RideList from '../RideList';
+import UserRideList from '../UserRideList';
 
 function HomePageContainer({userId}) {
   return (

@@ -9,11 +9,11 @@ class UserRideList extends Component {
     }
   }
   componentDidMount() {
-    this.getRides().catch((err) => {
+    this.getUserRides().catch((err) => {
       console.log(err);
     })
   }
-  getRides = async () => {
+  getUserRides = async () => {
 
     userId = 
 
@@ -26,22 +26,17 @@ class UserRideList extends Component {
     });
 
     const rides = await ridesJSON.json();
-    const available_rides = rides.retrieved_rides
-    console.log(available_rides)
-    this.setState({rides: available_rides});
+  
+    console.log(rides)
+    this.setState({rides: rides});
   }
-   //<ShowRide userId={this.props.userId} fields={['name','pickup','destination','pickup_time','driver','delete']} rideId={ride.id}/>
+   
   render() {
 
-    const rideList = this.state.rides.map((ride) => {
+    const UserRideList = this.state.rides.map((ride) => {
       return (
         <li key={ride.id}>
-          ride description: {ride.name} <br />
-          ride destination: {ride.destination} <br />
-          available seats: {ride.passenger_slots} <br />
-          pickup date: {ride.pickup_date} <br />
-          pickup time: {ride.pickup_time} <br />
-          pickup location: {ride.pickup} <br />
+          
         </li>
       );
     })
@@ -53,5 +48,5 @@ class UserRideList extends Component {
     );
   }
 }
-//<ul>{rideList}</ul>
+
 export default UserRideList;

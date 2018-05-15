@@ -35,9 +35,11 @@ getRides = async () => {
     return (
       <div className="App">
         {this.state.loggedIn ?
-          <HomePageContainer userId={this.state.userId} />:
-          <Login setLoggedIn={this.setLoggedIn}/> 
-          <RideSearchContainer getRides={this.getRides} />   
+          <div>
+            <HomePageContainer userId={this.state.userId} />
+            <RideSearchContainer getRides={this.getRides} />
+          </div>:
+          <Login setLoggedIn={this.setLoggedIn}/>    
         }
       </div>
     );
