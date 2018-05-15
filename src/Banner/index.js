@@ -28,7 +28,7 @@ class Banner extends Component {
 		return (
 			<div id="container">
 				<button onClick={this.showCreate}>Create Ride</button>
-				<button onClick={this.showSearch}>Search for Rides</button>
+				<button onClick={this.props.navFunc}>{this.props.nav}</button>
 				<h1>{this.props.title}</h1>
 				<EditButton btnText="Edit Account" userId={this.props.id}/>
 				<button onClick={this.logout} >Logout</button>
