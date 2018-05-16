@@ -16,9 +16,9 @@ class CreateRide extends Component {
 		})
 	}
 	getUsers = async () => {
-		// const usersJSON = await fetch('database users',{
-		// 	credentials: 'include'
-		// })
+		const usersJSON = await fetch('http://localhost:9292/users',{
+			credentials: 'include',
+		})
 
 		const users = {
 			success: true,
@@ -72,7 +72,10 @@ class CreateRide extends Component {
 
 		body['driver_user_id'] = driver.id;
 
-		//await fetch POST
+		await fetch('http://localhost:9292/rides', {
+			credentials: 'include',
+			body: JSON.stringify(body)
+		})
 
 		this.props.close();
 	}
