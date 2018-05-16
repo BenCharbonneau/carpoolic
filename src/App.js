@@ -8,13 +8,12 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      loggedIn: true,
-      userId: 1,
+      loggedIn: false,
+      userId: -1,
       page: ''
     }
   }
   setLoggedIn = (id) => {
-    console.log(id);
     this.setState({loggedIn: true, userId: id});
   }
   showSearch = () => {
