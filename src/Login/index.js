@@ -50,7 +50,7 @@ class Login extends Component {
 		});
 
 		const login = await loginJSON.json();
-		console.log(login);
+
 		return login
 	}
 	createUser = async (frmVals) => {
@@ -80,7 +80,7 @@ class Login extends Component {
 	  		inputs = (
 	  			[
 	         		<input key={1} type="text" name="username" placeholder="Username" />,
-	      	 		<input key={2} type="password" name="password" placeholder="Password" />,
+	      	 		<input key={2} type="password" name="password" autoComplete="off" placeholder="Password" />,
 	      	 		<button key={3} type="submit">Login</button>
 	        	]
 	  		);
@@ -92,12 +92,11 @@ class Login extends Component {
 
 	  		inputs = (
 	  			[
-	         <input key={1}type="text" name="username" placeholder="Username" />,
-	         <input key={2} type="password" name="password" placeholder="Password" />,
-	         <input key={3} type="tel" name="phone" placeholder="Phone Number" defaultValue="" />,
-	         <input key={4} type="email" name="email" placeholder="Email" />,
-	         <button key={5} type="submit">Register</button>
-	        ]
+	         		<input key={1}type="text" name="username" placeholder="Username" />,
+	         		<input key={2} type="password" name="password" autoComplete="off" placeholder="Password" />,
+	         		<input key={3} type="email" name="email" autoComplete="email" placeholder="Email" />,
+	         		<button key={4} type="submit">Register</button>
+	        	]
 	  		);
 
 	  		link = "Already a user? Click here to login.";

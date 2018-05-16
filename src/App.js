@@ -22,10 +22,17 @@ class App extends Component {
   showHome = () => {
     this.setState({page: ''})
   }
+  logout = async () => {
+    await fetch('http://localhost:9292/users/logout',{
+      credentials: 'include'
+    })
+
+    this.setState({loggedIn: false});
+  }
   render() {
 
     const page = this.state.page ? <SearchPage showHome={this.showHome} userId={this.state.userId} /> : 
-    <HomePage showSearch={this.showSearch} userId={this.state.userId} />
+    <HomePage setState={this.showHome} showSearch={this.showSearch} userId={this.state.userId} />
 
     return (
       <div className="App">

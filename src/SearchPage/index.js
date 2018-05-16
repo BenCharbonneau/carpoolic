@@ -1,11 +1,11 @@
-import React,{Component} from 'react';
+import React from 'react';
 import RideListContainer from '../RideListContainer';
 import Banner from '../Banner';
 
-function SearchPage({userId, showHome}) {
+function SearchPage({userId, showHome, logout}) {
   return (
     <div>
-      <Banner id={userId} nav="View My Rides" navFunc={showHome} title="Carpoolic"/>
+      <Banner id={userId} nav="View My Rides" navFunc={showHome} logout={logout} title="Carpoolic"/>
       <RideListContainer userId={userId} srchCrit={true}/>
     </div>
   );

@@ -8,6 +8,7 @@ class RideListContainer extends Component {
     this.state = {
       rides: [],
       modalClass: 'closed',
+      message: '',
       ride: -1
     }
   }
@@ -30,7 +31,6 @@ class RideListContainer extends Component {
     });
 
     const rides = await ridesJSON.json();
-    console.log(rides, "User");
   
     this.setState({rides: rides});
   }
@@ -41,7 +41,6 @@ class RideListContainer extends Component {
       });
 
       const rides = await ridesJSON.json();
-      console.log(rides, "List");
 
       this.setState({rides: rides.retrieved_rides});
     }
@@ -54,8 +53,10 @@ class RideListContainer extends Component {
       this.setState({modalClass: 'open', ride: e.currentTarget.id})
     }
   }
-  rideHide = () => {
-    this.setState({modalClass: 'closed', ride: -1})
+  rideHide = (response) => {
+    let message;
+    if (response && response.message) message = response.message
+    this.setState({modalClass: 'closed', ride: -1, message: message})
   }
   render() {
 
@@ -71,6 +72,7 @@ class RideListContainer extends Component {
 
     return (
       <div>
+        { this.state.message ? <p>{this.state.message}</p> : '' }
         <ul>{rides}</ul>
         <Modal comp={showComp} cssClass={this.state.modalClass}/>
       </div>
