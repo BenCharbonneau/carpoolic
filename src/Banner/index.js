@@ -18,12 +18,12 @@ class Banner extends Component {
 		let message
 		if (response && response.message) message = response.message
 
-		this.props.setParentState();
+		// this.props.setParentState();
 
 		this.setState({modalClass: 'closed',message: message})
 	}
 	render() {
-		const createComp = <CreateRide close={this.hideCreate} />
+		const createComp = <CreateRide userId={this.props.id} close={this.hideCreate} />
 
 		return (
 			<div id="container">

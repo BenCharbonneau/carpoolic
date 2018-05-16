@@ -7,7 +7,10 @@ class CreateRide extends Component {
 		this.state = {
 			users: [],
 			autoCompUsers: [],
-			driverInpLength: 0
+			driverInpLength: 0,
+			currentUser: {
+				username: ''
+			}
 		}
 	}
 	componentDidMount() {
@@ -22,8 +25,11 @@ class CreateRide extends Component {
 
 		const users = await usersJSON.json();
 
-		this.setState({users: users})
+		const driver = users.find((user) => {
+			return user.id === this.props.userId
+		})
 
+		this.setState({currentUser: driver, users: users})
 	}
 	handleChange = async (e) => {
 		const name = e.currentTarget.value
@@ -88,8 +94,9 @@ class CreateRide extends Component {
 			this.setState({autoCompUsers: [], driverInpLength: 0})
 		}
 	}
-	render() {
 
+	render() {
+	
 		const inpL = this.state.driverInpLength;
 		let autoComp = this.state.autoCompUsers.map((user) => {
 			return (
@@ -121,11 +128,9 @@ class CreateRide extends Component {
 					<input name="pickup_time" type="time" placeholder="Pickup time"/>
 				</label>
 				<div className="driver-container">
-					<label>Driver:</label>
-					<div className="autocomplete">
-						<input name="driver_user_id" id="driver" type="text" autoComplete="off" onChange={this.handleChange} />
-						{autoComp}
-					</div>
+				<div>
+					Driver: {this.state.currentUser.username}
+				</div>
 				</div>
 				<label>Number of available seats:
 					<input name="passenger_slots" type="number" placeholder="Available seats"/>

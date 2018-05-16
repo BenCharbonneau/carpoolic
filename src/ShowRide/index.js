@@ -69,7 +69,6 @@ class ShowRide extends Component {
 				</li>
 			);
 		})
-
 		return (
 
 			<div>
