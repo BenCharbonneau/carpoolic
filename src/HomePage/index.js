@@ -1,11 +1,11 @@
-import React,{Component} from 'react';
+import React from 'react';
 import RideListContainer from '../RideListContainer';
 import Banner from '../Banner';
 
-function HomePage({userId, showSearch}) {
+function HomePage({userId, showSearch, logout, setState}) {
   return (
     <div>
-      <Banner id={userId} nav="Search for Rides" navFunc={showSearch} title="Carpoolic"/>
+      <Banner id={userId} nav="Search for Rides" navFunc={showSearch} logout={logout} setParentState={setState} title="Carpoolic"/>
       <RideListContainer userId={userId} />
     </div>
   );
