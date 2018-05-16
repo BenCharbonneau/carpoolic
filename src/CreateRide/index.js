@@ -16,24 +16,13 @@ class CreateRide extends Component {
 		})
 	}
 	getUsers = async () => {
-		// const usersJSON = await fetch('database users',{
-		// 	credentials: 'include'
-		// })
+		const usersJSON = await fetch('http://localhost:9292/users',{
+			credentials: 'include',
+		})
 
-		const users = {
-			success: true,
-			users: [
-				{
-					id: 1,
-					username: 'Kevin'
-				},{
-					id: 2,
-					username: 'Sam'
-				}
-			]
-		}
+		const users = await usersJSON.json();
 
-		this.setState({users: users.users})
+		this.setState({users: users})
 
 	}
 	handleChange = async (e) => {
@@ -51,7 +40,9 @@ class CreateRide extends Component {
 
 		this.setState({autoCompUsers: autoCompUsers, driverInpLength: name.length});
 	}
-	handleSubmit = (e) => {
+	handleSubmit = async (e) => {
+		e.preventDefault();
+
 		const labels = e.currentTarget.children;
 		let input;
 		let body = {};
@@ -70,14 +61,23 @@ class CreateRide extends Component {
 			return user.username === driverUsrnm
 		})
 
-		body['driver_user_id'] = driver.id;
+		if (driver) {
+			body['driver_user_id'] = driver.id;
+		}
 
-		//await fetch POST
+		console.log(body);
 
-		this.props.close();
+		const responseJSON = await fetch('http://localhost:9292/rides',{
+			credentials: 'include',
+			method: "POST",
+			body: JSON.stringify(body)
+		})
+
+		const response = await responseJSON.json();
+
+		this.props.close(response);
 	}
 	saveDriverValue = (e) => {
-		console.log(e.currentTarget.children);
 
 		document.getElementById('driver').value = e.currentTarget.children[1].value
 

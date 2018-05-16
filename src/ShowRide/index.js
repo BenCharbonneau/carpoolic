@@ -10,6 +10,7 @@ class ShowRide extends Component {
 			ride: {},
 			driver: {},
 			passengers: [],
+			message: '',
 			fields: ['name','pickup','destination','pickup_time','driver','passengers','delete','edit','ok']
 		}
 	}
@@ -28,7 +29,10 @@ class ShowRide extends Component {
 			console.log(err);
 		})
 	}
-	getRide = async () => {
+	getRide = async (response) => {
+		let message;
+    	if (response && response.message) message = response.message
+
 		const rideId = this.props.rideId;
 
 		const rideJSON = await fetch('http://localhost:9292/rides/' + rideId, {
@@ -39,18 +43,17 @@ class ShowRide extends Component {
 		
 		const users = ride.passenger_ids;
 
-		const driver = users.find((user) => {
+		let driver = users.find((user) => {
 			return user.id === ride.found_ride.driver_user_id
 		})
+
+		if (!driver) driver = {};
 
 		const passengers = users.filter((user) => {
 			return user !== driver;
 		})
 
-		console.log(ride, " this is ride from state")
-		console.log(driver, " this is driver from state")
-		console.log(passengers, " this is passengers from state")
-		this.setState({ride: ride.found_ride, driver: driver, passengers: passengers});
+		this.setState({ride: ride.found_ride, driver: driver, passengers: passengers, message: message});
 	}
 	render() {
 
@@ -62,7 +65,7 @@ class ShowRide extends Component {
 			return (
 				<li key={passenger.id}>
 					{passenger.username}
-					{(this.props.userId === passenger.id) ? <RemovePassButton id={passenger.id} reState={this.getRide} /> : '' }
+					{(this.props.userId === passenger.id) ? <RemovePassButton userId={passenger.id} rideId={ride.id} reState={this.getRide} /> : '' }
 				</li>
 			);
 		})
@@ -70,6 +73,7 @@ class ShowRide extends Component {
 		return (
 
 			<div>
+				{ this.state.message ? <p>{this.state.message}</p> : '' }
 				{ fields.includes('name') ? <p><strong>{ride.name}</strong></p> : '' }
 		    	{ fields.includes('pickup') ? <p>Pickup Location: {ride.pickup}</p> : '' }
 		    	{ fields.includes('destination') ? <p>Destination: {ride.destination}</p> : '' }

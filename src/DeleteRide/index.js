@@ -11,7 +11,7 @@ const delRide = async (reState,e) => {
 
 	const response = await cancelRide.json();
 
-	reState();
+	reState(response);
 }
 catch (err) {
 	console.log(err)
