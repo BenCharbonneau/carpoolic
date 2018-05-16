@@ -11,7 +11,7 @@ class ShowRide extends Component {
 			driver: {},
 			passengers: [],
 			message: '',
-			fields: ['name','pickup','destination','pickup_time','driver','passengers','delete','edit','ok']
+			fields: ['name','pickup','destination','pickup_time','driver','passengers','delete','edit','ok', 'addPass']
 		}
 	}
 	componentDidMount() {
@@ -83,6 +83,7 @@ class ShowRide extends Component {
 		    	{ fields.includes('edit') && (driver === "You") ? <EditButton rideId={ride.id} close={this.getRide} btnText="Edit" /> : '' }
 		    	{ fields.includes('delete') && (driver === "You") ? <DeleteRide id={ride.id} reState={this.props.close} /> : '' }
 		    	{ fields.includes('ok') ? <button onClick={this.props.close}>OK</button> : '' }
+		    	{ fields.includes('addPass') ? <button> Claim Seat in this Ride </button> : '' }
 		    </div>
 	    );
 	}
