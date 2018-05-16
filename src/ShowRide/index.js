@@ -47,9 +47,9 @@ class ShowRide extends Component {
 			return user !== driver;
 		})
 
+		console.log(ride, " this is ride from state")
 		console.log(driver, " this is driver from state")
-		console.log(ride.found_ride.pickup_time, " this is pickup_time")
-
+		console.log(passengers, " this is passengers from state")
 		this.setState({ride: ride.found_ride, driver: driver, passengers: passengers});
 	}
 	render() {
@@ -61,7 +61,7 @@ class ShowRide extends Component {
 		const passengers = this.state.passengers.map((passenger) => {
 			return (
 				<li key={passenger.id}>
-					{passenger.name}
+					{passenger.username}
 					{(this.props.userId === passenger.id) ? <RemovePassButton id={passenger.id} reState={this.getRide} /> : '' }
 				</li>
 			);

@@ -56,7 +56,9 @@ class RideListContainer extends Component {
     }
   }
   rideShow = (e) => {
-    this.setState({modalClass: 'open', ride: e.currentTarget.id})
+    if(e.target.tagName !== "BUTTON") {
+      this.setState({modalClass: 'open', ride: e.currentTarget.id})
+    }
   }
   rideHide = () => {
     this.setState({modalClass: 'closed', ride: -1})
@@ -71,7 +73,7 @@ class RideListContainer extends Component {
       );
     })
 
-    const showComp = <ShowRide userId={this.props.userId} rideId={this.state.ride} close={this.rideHide} />
+    const showComp = this.state.ride >= 0 ? <ShowRide userId={this.props.userId} rideId={this.state.ride} close={this.rideHide} /> : ''
 
     return (
       <div>
