@@ -3,6 +3,7 @@ import './App.css';
 import Login from './Login';
 import HomePage from './HomePage';
 import SearchPage from './SearchPage';
+import Banner from './Banner';
 
 class App extends Component {
   constructor() {
@@ -10,17 +11,23 @@ class App extends Component {
     this.state = {
       loggedIn: false,
       userId: -1,
-      page: ''
+      page: '',
+      bannerButt: 'Search for Rides'
     }
   }
   setLoggedIn = (id) => {
     this.setState({loggedIn: true, userId: id});
   }
-  showSearch = () => {
-    this.setState({page: 'search'})
+  showToggle = () => {
+    if (this.state.page === '') {
+      this.setState({page: 'search', bannerButt: 'View My Rides'})
+    }
+    else {
+      this.showHome();
+    }
   }
   showHome = () => {
-    this.setState({page: ''})
+    this.setState({page: '', bannerButt: 'Search for Rides'})
   }
   logout = async () => {
     await fetch('http://localhost:9292/users/logout',{
@@ -31,13 +38,14 @@ class App extends Component {
   }
   render() {
 
-    const page = this.state.page ? <SearchPage showHome={this.showHome} userId={this.state.userId} /> : 
-    <HomePage setState={this.showHome} showSearch={this.showSearch} userId={this.state.userId} />
+    const page = this.state.page ? <SearchPage userId={this.state.userId} /> : 
+    <HomePage userId={this.state.userId} />
 
     return (
       <div className="App">
         {this.state.loggedIn ?
           <div>
+            <Banner id={this.state.userId} reState={this.forceUpdate.bind(this)} nav={this.state.bannerButt} navFunc={this.showToggle} logout={this.logout} title="Carpoolic"/>
             {page}
           </div>:
           <Login setLoggedIn={this.setLoggedIn}/>    

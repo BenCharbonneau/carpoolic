@@ -18,7 +18,7 @@ class Banner extends Component {
 		let message
 		if (response && response.message) message = response.message
 
-		// this.props.setParentState();
+		this.props.reState();
 
 		this.setState({modalClass: 'closed',message: message})
 	}
@@ -27,13 +27,13 @@ class Banner extends Component {
 
 		return (
 			<div id="container">
-				{ this.state.message ? <p>{this.state.message}</p> : '' }
 				<button onClick={this.showCreate}>Create Ride</button>
 				<button onClick={this.props.navFunc}>{this.props.nav}</button>
 				<h1>{this.props.title}</h1>
 				<EditButton btnText="Edit Account" userId={this.props.id}/>
 				<button onClick={this.props.logout} >Logout</button>
 				<Modal cssClass={this.state.modalClass} comp={createComp}/>
+				{ this.state.message ? <p>{this.state.message}</p> : '' }
 			</div>
 		);
 	}

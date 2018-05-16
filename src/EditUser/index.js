@@ -8,6 +8,7 @@ class EditUser extends Component {
 			user: {
 				name: '',
 				username: '',
+				user: {},
 				email: ''
 			}
 		}
@@ -18,25 +19,15 @@ class EditUser extends Component {
 		})
 	}
 	getUser = async () => {
-		// const userJSON = await fetch('database rides/'+this.props.id,{
-		// 	credentials: 'include'
-		// })
+		const userJSON = await fetch('http://localhost:9292/users/'+this.props.id,{
+			credentials: 'include'
+		})
 
-		// const user = await rideJSON.json();
-
-		const user = {
-			success: true,
-			user: {
-				id: 1,
-				name: 'Awesome sauce, the person',
-				username: 'Wrigley',
-				email: 'ben@fake.com'
-			}
-		}
+		const user = await userJSON.json();
 
 		this.setState({user: user.user});
 	}
-	handleSubmit = (e) => {
+	handleSubmit = async(e) => {
 		e.preventDefault();
 
 		const labels = e.currentTarget.children;
@@ -49,9 +40,15 @@ class EditUser extends Component {
 			}
 		}
 		
-		//await fetch PUT
+		const responseJSON = await fetch('http://localhost:9292/users',{
+			method: "PUT",
+			credentials: 'include',
+			body: JSON.stringify(body)
+		});
 
-		this.props.close();
+		const response = await responseJSON.json();
+
+		this.props.close(response);
 	}
 	render() {
 		const user = this.state.user;
