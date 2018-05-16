@@ -32,7 +32,7 @@ class App extends Component {
   render() {
 
     const page = this.state.page ? <SearchPage showHome={this.showHome} userId={this.state.userId} /> : 
-    <HomePage setState={this.showHome} showSearch={this.showSearch} userId={this.state.userId} />
+    <HomePage logout={this.logout} showSearch={this.showSearch} userId={this.state.userId} />
 
     return (
       <div className="App">

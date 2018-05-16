@@ -54,21 +54,22 @@ class RideListContainer extends Component {
     }
   }
   rideHide = (response) => {
+    console.log("Here");
     let message;
     if (response && response.message) message = response.message
-    this.setState({modalClass: 'closed', ride: -1, message: message})
+    //this.setState({modalClass: 'closed', ride: -1, message: message})
   }
   render() {
 
     const rides = this.state.rides.map((ride) => {
       return (
         <li key={ride.id} id={ride.id} onClick={this.rideShow}>
-          <ShowRide userId={this.props.userId} fields={['name','pickup','destination','pickup_time','driver','delete']} rideId={ride.id}/> 
+          <ShowRide userId={this.props.userId} fields={['name','pickup','destination','pickup_time','driver','delete']} rideId={ride.id} close={this.rideHide}/> 
         </li>
       );
     })
 
-    const showComp = this.state.ride >= 0 ? <ShowRide userId={this.props.userId} rideId={this.state.ride} close={this.rideHide} /> : ''
+    const showComp = (this.state.ride >= 0) ? <ShowRide userId={this.props.userId} rideId={this.state.ride} close={this.rideHide} /> : ''
 
     return (
       <div>
