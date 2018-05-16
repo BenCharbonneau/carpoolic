@@ -29,9 +29,9 @@ class ShowRide extends Component {
 		})
 	}
 	getRide = async () => {
-		// const rideId = 
+		const rideId = this.props.rideId;
 
-		const rideJSON = await fetch('http://localhost:9292/rides/' + 1, {
+		const rideJSON = await fetch('http://localhost:9292/rides/' + rideId, {
 			credentials: 'include'
 		})
 
@@ -47,22 +47,28 @@ class ShowRide extends Component {
 			return user !== driver;
 		})
 
+		console.log(ride, " this is ride from state")
+		console.log(driver, " this is driver from state")
+		console.log(passengers, " this is passengers from state")
 		this.setState({ride: ride.found_ride, driver: driver, passengers: passengers});
 	}
 	render() {
+
 		const ride = this.state.ride
 		const fields = this.state.fields;
+
 		const driver = (ride.driver_user_id === this.props.userId) ? "You" : this.state.driver.username
 		const passengers = this.state.passengers.map((passenger) => {
 			return (
 				<li key={passenger.id}>
-					{passenger.name}
+					{passenger.username}
 					{(this.props.userId === passenger.id) ? <RemovePassButton id={passenger.id} reState={this.getRide} /> : '' }
 				</li>
 			);
 		})
 
 		return (
+
 			<div>
 				{ fields.includes('name') ? <p><strong>{ride.name}</strong></p> : '' }
 		    	{ fields.includes('pickup') ? <p>Pickup Location: {ride.pickup}</p> : '' }

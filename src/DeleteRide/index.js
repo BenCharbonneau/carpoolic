@@ -1,15 +1,25 @@
 import React from 'react';
 
 const delRide = async (reState,e) => {
-	const id = e.currentTarget.id
-	await fetch('http://localhost:9292/rides/' + id,{
-		credentials: 'include'
+	try{
+	const id = e.currentTarget.id;
+
+	const cancelRide = await fetch('http://localhost:9292/rides/' + id, {
+		// credentials: 'include',
+		method: "DELETE"
 	});
+
+	const response = await cancelRide.json();
 
 	reState();
 }
+catch (err) {
+	console.log(err)
+}
+}
 
 function DeleteRide({id, reState}) {
+
 	return (
 		<button id={id} onClick={delRide.bind(null,reState)}>Cancel</button>
 	);
