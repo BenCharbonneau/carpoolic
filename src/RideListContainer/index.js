@@ -27,13 +27,10 @@ class RideListContainer extends Component {
 
    const ridesJSON = await fetch('http://localhost:9292/users/' + this.props.userId + '/rides', {
       credentials: 'include'
-      // body: JSON.stringify({
-      //   username: username,
-      //   password: password
-      // })
     });
 
     const rides = await ridesJSON.json();
+    console.log(rides, "User");
   
     this.setState({rides: rides});
   }
@@ -41,13 +38,10 @@ class RideListContainer extends Component {
     try {
       const ridesJSON = await fetch('http://localhost:9292/rides', {
         credentials: 'include'
-        // body: JSON.stringify({
-        //   username: username,
-        //   password: password
-        // })
       });
 
       const rides = await ridesJSON.json();
+      console.log(rides, "List");
 
       this.setState({rides: rides.retrieved_rides});
     }
@@ -56,7 +50,10 @@ class RideListContainer extends Component {
     }
   }
   rideShow = (e) => {
-    this.setState({modalClass: 'open', ride: e.currentTarget.id})
+    console.log(e.target);
+    if (e.target.tagName !== "BUTTON") {
+      this.setState({modalClass: 'open', ride: e.currentTarget.id})
+    }
   }
   rideHide = () => {
     this.setState({modalClass: 'closed', ride: -1})

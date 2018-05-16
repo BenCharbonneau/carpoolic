@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 class Login extends Component {
-	constructor() {
-		super();
-    if (!this.props) this.props = {register: false};
+	constructor(props) {
+		super(props);
+    	if (!this.props) this.props = {register: false};
 		this.state = {
 			message: '',
 			register: this.props.register
@@ -11,7 +11,7 @@ class Login extends Component {
 	}
 	setUsername = async (e) => {
 
-    e.preventDefault();
+    	e.preventDefault();
 
 		const inputs = e.currentTarget.children;
 		const frmVals = {};
@@ -40,92 +40,80 @@ class Login extends Component {
 		}
 	}
 	checkPassword = async (username, password) => {
-		// const login = await fetch('database',{
-		// 	body: JSON.stringify({
-		// 		username: username,
-		// 		password: password
-		// 	})
-		// });
+		const loginJSON = await fetch('http://localhost:9292/users/login',{
+			method: "POST",
+			credentials: 'include',
+			body: JSON.stringify({
+				username: username,
+				password: password
+			})
+		});
 
-		const login = {
-			success: true,
-			user_id: 1
-		}
-
-		// const login = {
-		// 	success: false,
-		// 	message: "Invalid username and password."
-		// }
-
+		const login = await loginJSON.json();
+		console.log(login);
 		return login
 	}
 	createUser = async (frmVals) => {
-  	// const register = await fetch('database',{
-  	//   body: JSON.stringify(frmVals)
-  	// });
+	  	const registerJSON = await fetch('http://localhost:9292/users/register',{
+	  	  method: "POST",
+	  	  credentials: 'include',
+	  	  body: JSON.stringify(frmVals)
+	  	});
 
-  	const register = {
-			success: true,
-			user_id: 1
-    }
-
-		// const register = {
-		// 	success: false,
-		// 	message: "That username is already taken. Try again."
-		// }
+	  	const register = await registerJSON.json();
 
 		return register;
 	}
 	flipReg = (register) => {
 		this.setState({ register: !register, message: '' });
 	}
-  render() {
-  	const register = this.state.register;
+    render() {
+	  	const register = this.state.register;
 
-	  let title;
-  	let inputs;
-  	let link;
+		let title;
+	  	let inputs;
+	  	let link;
 
-  	if (!register) {
-  		title = "Login";
+	  	if (!register) {
+	  		title = "Login";
 
-  		inputs = (
-  			[
-         <input type="text" name="username" placeholder="Username" />,
-      	 <input type="password" name="password" placeholder="Password" />,
-      	 <button type="submit">Login</button>
-        ]
-  		);
+	  		inputs = (
+	  			[
+	         		<input key={1} type="text" name="username" placeholder="Username" />,
+	      	 		<input key={2} type="password" name="password" placeholder="Password" />,
+	      	 		<button key={3} type="submit">Login</button>
+	        	]
+	  		);
 
-  		link = "Not a user? Click here to register.";
-  	}
-  	else {
-  		title = "Register";
+	  		link = "Not a user? Click here to register.";
+	  	}
+	  	else {
+	  		title = "Register";
 
-  		inputs = (
-  			[
-         <input type="text" name="username" placeholder="Username" />,
-         <input type="password" name="password" placeholder="Password" />,
-         <input type="tel" name="phone" placeholder="Phone Number" defaultValue="" />,
-         <input type="email" name="email" placeholder="Email" />,
-         <button type="submit">Register</button>
-        ]
-  		);
+	  		inputs = (
+	  			[
+	         <input key={1}type="text" name="username" placeholder="Username" />,
+	         <input key={2} type="password" name="password" placeholder="Password" />,
+	         <input key={3} type="tel" name="phone" placeholder="Phone Number" defaultValue="" />,
+	         <input key={4} type="email" name="email" placeholder="Email" />,
+	         <button key={5} type="submit">Register</button>
+	        ]
+	  		);
 
-  		link = "Already a user? Click here to login.";
-  	}
+	  		link = "Already a user? Click here to login.";
+  		}
 
-    return (
-      <div>
-      	<h1>{title}</h1>
-      	<p>{this.state.message}</p>
-      	<form onSubmit={this.setUsername}>
-      		{inputs}
-      	</form>
-        <p onClick={this.flipReg.bind(null,register)} class="link">{link}</p>
-      </div>   
-    );
-  }
+	    return (
+	      <div>
+	      	<h1>{title}</h1>
+	      	<p>{this.state.message}</p>
+	      	<form onSubmit={this.setUsername}>
+	      		{inputs}
+	      	</form>
+	        <p onClick={this.flipReg.bind(null,register)} className="link">{link}</p>
+	      </div>   
+	    );
+    }
 }
 
 export default Login;
