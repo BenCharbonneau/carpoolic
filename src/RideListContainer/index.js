@@ -13,36 +13,30 @@ class RideListContainer extends Component {
     }
   }
   componentDidMount() {
-    if (this.props.srchCrit) {
-      this.getRides().catch((err) => {
-        console.log(err);
-      })
-    }
-    else {
-      this.getUserRides().catch((err) => {
-        console.log(err);
-      })    
-    }
-  }
-  getUserRides = async () => {
-
-   const ridesJSON = await fetch('http://localhost:9292/users/' + this.props.userId + '/rides', {
-      credentials: 'include'
-    });
-
-    const rides = await ridesJSON.json();
-  
-    this.setState({rides: rides});
+    this.getRides().catch((err) => {
+      console.log(err);
+    })
   }
   getRides = async () => {
     try {
-      const ridesJSON = await fetch('http://localhost:9292/rides', {
-        credentials: 'include'
-      });
+      if (this.props.srchCrit) {
+        const ridesJSON = await fetch('http://localhost:9292/rides', {
+          credentials: 'include'
+        });
 
-      const rides = await ridesJSON.json();
+        const rides = await ridesJSON.json();
 
-      this.setState({rides: rides.retrieved_rides});
+        this.setState({rides: rides.retrieved_rides});
+      }
+      else {
+       const ridesJSON = await fetch('http://localhost:9292/users/' + this.props.userId + '/rides', {
+          credentials: 'include'
+        });
+
+        const rides = await ridesJSON.json();
+      
+        this.setState({rides: rides});
+      }
     }
     catch (err) {
       console.log(err);
@@ -54,10 +48,14 @@ class RideListContainer extends Component {
     }
   }
   rideHide = (response) => {
-    console.log("Here");
     let message;
     if (response && response.message) message = response.message
-    //this.setState({modalClass: 'closed', ride: -1, message: message})
+    
+    this.setState({modalClass: 'closed', ride: -1, message: message})
+    
+    this.getRides().catch((err) => {
+      console.log(err);
+    });
   }
   render() {
 
