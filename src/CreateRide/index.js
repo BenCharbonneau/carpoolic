@@ -65,8 +65,6 @@ class CreateRide extends Component {
 			body['driver_user_id'] = driver.id;
 		}
 
-		console.log(body);
-
 		const responseJSON = await fetch('http://localhost:9292/rides',{
 			credentials: 'include',
 			method: "POST",
