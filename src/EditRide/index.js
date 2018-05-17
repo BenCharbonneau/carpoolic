@@ -62,7 +62,7 @@ class EditRide extends Component {
 				body[input.name] = input.value;
 			}
 		}
-		
+
 		const responseJSON = await fetch("http://localhost:9292/rides/"+this.props.id,{
 			credentials: 'include',
 			method: 'PUT',

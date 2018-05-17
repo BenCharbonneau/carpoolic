@@ -2,12 +2,15 @@ import React from 'react';
 
 const delUser = async (reState,e) => {
 	const id = e.currentTarget.id
-	await fetch('http://localhost:9292/users/' + id, {
-	// 	credentials: 'include',
-	method: "DELETE"
+	const responseJSON = await fetch('http://localhost:9292/users/' + id, {
+		credentials: 'include',
+		method: "DELETE"
 	});
 
-	reState();
+	const response = await responseJSON.json();
+	const logout = true;
+	
+	reState(response,logout);
 }
 
 function DeleteUser({id, reState}) {

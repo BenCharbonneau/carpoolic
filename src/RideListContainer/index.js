@@ -35,7 +35,7 @@ class RideListContainer extends Component {
     return (
       <div>
         <ul>{rides}</ul>
-        <Modal comp={showComp} cssClass={this.state.modalClass}/>
+        <Modal comp={showComp} close={this.rideHide} cssClass={this.state.modalClass}/>
       </div>
     );
   }
