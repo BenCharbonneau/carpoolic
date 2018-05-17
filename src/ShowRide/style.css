@@ -12,12 +12,9 @@
 	margin-bottom: 20px;
 }
 
-/*.from-list:nth-child(even) {
-	background-color: #f28c2e;
-}*/
-
 .from-list td {
 	padding: 15px;
+	color: black;
 }
 
 .from-modal {

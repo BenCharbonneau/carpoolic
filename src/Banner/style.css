@@ -1,20 +1,14 @@
 #container {
 	display: flex;
 	justify-content: center;
-	background-color: rgba(0,0,0,0.7);
+	background-color: #222222;
 	align-items: center;
 	padding: 20px;
 }
 
-#container h1 {
-	font-size: 60px;
-	color: white;
-	margin: 20px 30px;
-}
-
 #container button {
 	margin: 0 10px;
-	max-height: 40px;
+	max-height: 50px;
 	min-width: 100px;
 }
 

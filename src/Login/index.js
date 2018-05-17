@@ -22,7 +22,6 @@ class Login extends Component {
 			if (label.tagName === 'LABEL') {
 				input = label.children[0];
 			}
-			console.log(input);
 
 			if (input.name) {
 				frmVals[input.name] = input.value;
