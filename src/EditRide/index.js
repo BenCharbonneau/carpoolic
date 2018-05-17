@@ -33,8 +33,6 @@ class EditRide extends Component {
 
 		const ride = await rideJSON.json();
 
-		console.log(ride);
-
 		const users = ride.passenger_ids
 
 		const driver = users.find((user) => {
