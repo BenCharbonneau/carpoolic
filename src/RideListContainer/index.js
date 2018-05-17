@@ -21,6 +21,7 @@ class RideListContainer extends Component {
     this.setState({modalClass: 'closed', ride: -1});
   }
   render() {
+
     const rides = this.props.rides ? this.props.rides.map((ride) => {
       return (
         <li key={ride.id} id={ride.id} onClick={this.rideShow}>
