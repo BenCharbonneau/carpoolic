@@ -98,8 +98,8 @@ class ShowRide extends Component {
 		    	{ fields.includes('passengers') ? <td><span>Available Seats:</span> {ride.passenger_slots}</td> : <td className="hidden"></td> }
 		    	{ fields.includes('driver') ? <td><span>Driver:</span> {driver}</td> : <td className="hidden"></td> }
 		    	{ fields.includes('passengers') ? <td><p>Passengers:</p><ul>{passengers}</ul></td> : <td className="hidden"></td> }
-		    	{ fields.includes('edit') && (driver === "You") ? <td><EditButton rideId={ride.id} close={this.getRide} btnText="Edit" /></td> : <td className="hidden"></td> }
-		    	{ fields.includes('delete') && (driver === "You") ? <td><DeleteRide id={ride.id} reState={this.props.close} /></td> : <td className="hidden"></td> }
+		    	{ fields.includes('edit') && (driver === "You") ? <td className="btn-data"><EditButton rideId={ride.id} close={this.getRide} btnText="Edit" /></td> : <td className="hidden"></td> }
+		    	{ fields.includes('delete') && (driver === "You") ? <td className="btn-data"><DeleteRide id={ride.id} reState={this.props.close} /></td> : <td className="hidden"></td> }
 		    	{ (fields.includes('addPass') && (driver !== "You") && !isPassenger) ? <td><button id={ride.id} onClick={this.addPassenger}>Claim Seat in this Ride</button></td> : <td className="hidden"></td> }
 		    </tr>
 	    );

@@ -12,9 +12,24 @@
 	margin-bottom: 20px;
 }
 
+.from-list .btn-data {
+	background-color: #f28c2e;
+}
+
 .from-list td {
 	padding: 15px;
 	color: black;
+}
+
+.from-list .btn-data button {
+	background-color: white;
+    border: none;
+    color: #f28c2e;;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
 }
 
 .from-modal {
