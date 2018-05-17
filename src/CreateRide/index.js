@@ -25,11 +25,11 @@ class CreateRide extends Component {
 
 		const users = await usersJSON.json();
 
-		const driver = users.find((user) => {
+		const driver = users.users.find((user) => {
 			return user.id === this.props.userId
 		})
 
-		this.setState({currentUser: driver, users: users})
+		this.setState({currentUser: driver, users: users.users})
 	}
 	handleChange = async (e) => {
 		const name = e.currentTarget.value

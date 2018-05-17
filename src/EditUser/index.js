@@ -6,9 +6,7 @@ class EditUser extends Component {
 		super();
 		this.state = {
 			user: {
-				name: '',
 				username: '',
-				user: {},
 				email: ''
 			}
 		}
@@ -27,7 +25,13 @@ class EditUser extends Component {
 
 		this.setState({user: user.user});
 	}
-	handleSubmit = async(e) => {
+	handleChange = (e) => {
+		const body = this.state.user;
+		body[e.currentTarget.name] = e.currentTarget.value;
+
+		this.setState({})
+	}
+	handleSubmit = async (e) => {
 		e.preventDefault();
 
 		const labels = e.currentTarget.children;
@@ -39,10 +43,10 @@ class EditUser extends Component {
 				body[input.name] = input.value;
 			}
 		}
-		
-		const responseJSON = await fetch('http://localhost:9292/users',{
-			method: "PUT",
+
+		const responseJSON = await fetch('http://localhost:9292/users/'+this.props.id,{
 			credentials: 'include',
+			method: 'PUT',
 			body: JSON.stringify(body)
 		});
 
@@ -58,16 +62,13 @@ class EditUser extends Component {
 				<form onSubmit={this.handleSubmit}>
 					<h3>Edit your account</h3>
 					<label>Username:
-						<input name="username" type="text" placeholder="Username" value={user.username}/>
+						<input name="username" type="text" placeholder="Username" autoComplete="off" onChange={this.handleChange} value={user.username}/>
 					</label>
-					<label>Password:
-						<input name="password" type="password" placeholder="Password"/>
-					</label>
-					<label>Name:
-						<input name="name" type="text" placeholder="Name" value={user.name}/>
+					<label>New Password:
+						<input name="password" type="password" autoComplete="off" placeholder="Password"/>
 					</label>
 					<label>Email:
-						<input name="email" type="email" placeholder="Email" value={user.email}/>
+						<input name="email" type="email" placeholder="Email" autoComplete="email" onChange={this.handleChange} value={user.email}/>
 					</label>
 					<input type="submit" value="Submit Updates" />
 				</form>

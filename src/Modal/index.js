@@ -1,11 +1,12 @@
 import React from 'react';
 import './style.css';
 
-function Modal({comp,cssClass}) {
+function Modal({comp,cssClass,close}) {
 	return (
 		<div className={cssClass}>
 			<div className="modal">
 				{comp}
+				<button onClick={close}>OK</button>
 			</div>
 		</div>
 	);
