@@ -15,12 +15,9 @@ class Banner extends Component {
 		this.setState({modalClass: 'open'})
 	}
 	hideCreate = (response) => {
-		let message
-		if (response && response.message) message = response.message
+		this.props.setMess(response);
 
-		this.props.reState();
-
-		this.setState({modalClass: 'closed',message: message})
+		this.setState({modalClass: 'closed'})
 	}
 	render() {
 		const createComp = <CreateRide userId={this.props.id} close={this.hideCreate} />
@@ -33,7 +30,6 @@ class Banner extends Component {
 				<EditButton btnText="Edit Account" userId={this.props.id}/>
 				<button onClick={this.props.logout} >Logout</button>
 				<Modal cssClass={this.state.modalClass} comp={createComp}/>
-				{ this.state.message ? <p>{this.state.message}</p> : '' }
 			</div>
 		);
 	}
