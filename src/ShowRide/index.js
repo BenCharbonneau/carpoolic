@@ -89,7 +89,7 @@ class ShowRide extends Component {
 			);
 		})
 		return (
-			<tr key={ride.id} className={this.props.cssClass} onClick={this.props.rowClick} id={ride.id}>
+			<tr className={this.props.cssClass} onClick={this.props.rowClick} id={ride.id}>
 				{ this.state.message ? <td>{this.state.message}</td>:<td className="hidden"></td>}
 				{ fields.includes('name') ? <td><strong>{ride.name}</strong></td> : <td className="hidden"></td> }
 		    	{ fields.includes('pickup') ? <td><span>Pickup Location:</span> {ride.pickup}</td> : <td className="hidden"></td> }

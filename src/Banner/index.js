@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import EditButton from '../EditButton';
 import CreateRide from '../CreateRide';
 import Modal from '../Modal';
+import './style.css';
 
 class Banner extends Component {
 	constructor() {

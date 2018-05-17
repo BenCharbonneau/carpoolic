@@ -1,0 +1,19 @@
+.list-container table {
+	margin: 0 auto;
+	border-collapse: separate;
+	border-spacing: 0 10px;
+}
+
+.list-container {
+	background-color: #f28c2e;
+}
+
+th {
+	padding: 20px;
+}
+
+h3 {
+	margin-bottom: 0;
+	color: white;
+	font-size: 40px;
+}
