@@ -27,41 +27,27 @@ class EditRide extends Component {
 		})
 	}
 	getRide = async () => {
-		// const rideJSON = await fetch('database rides/'+this.props.id,{
-		// 	credentials: 'include'
-		// })
+		const rideJSON = await fetch('http://localhost:9292/rides/'+this.props.id,{
+			credentials: 'include'
+		})
 
-		// const ride = await rideJSON.json();
+		const ride = await rideJSON.json();
 
-		const ride = {
-			success: true,
-			ride: {
-				id: 1,
-				name: 'Awesome sauce, the ride',
-				pickup: 'Wrigley',
-				destination: 'Soldier Field',
-				pickup_date: '1/1/2019',
-				pickup_time: '6:00 AM',
-				driver_user_id: 1,
-				passenger_slots: 4
-			}
-		}
+		console.log(ride);
 
-		//const users = fetch
-
-		const users = [{id:1,name:'Ben', username: 'Ben'},{id:2,name:'Jim', username: 'Jim'}];
+		const users = ride.passenger_ids
 
 		const driver = users.find((user) => {
-			return user.id === ride.ride.driver_user_id
+			return user.id === ride.found_ride.driver_user_id
 		})
 
 		const passengers = users.filter((user) => {
 			return user !== driver;
 		})
 
-		this.setState({ride: ride.ride, driver: driver, passengers: passengers});
+		this.setState({ride: ride.found_ride, driver: driver, passengers: passengers});
 	}
-	handleSubmit = (e) => {
+	handleSubmit = async (e) => {
 		e.preventDefault();
 
 		const submitElem = document.activeElement
@@ -79,9 +65,23 @@ class EditRide extends Component {
 			}
 		}
 		
-		//await fetch PUT
+		const responseJSON = await fetch("http://localhost:9292/rides/"+this.props.id,{
+			credentials: 'include',
+			method: 'PUT',
+			body: JSON.stringify(body)
+		})
 
-		this.props.close();
+		const response = responseJSON.json();
+
+		this.props.close(response);
+	}
+	handleChange = (e) => {
+		const name = e.currentTarget.name;
+		const value = e.currentTarget.value;
+		const ride = this.state.ride;
+		ride[name] = value
+
+		this.setState({ ride: ride });
 	}
 	render() {
 		const ride = this.state.ride;
@@ -99,27 +99,27 @@ class EditRide extends Component {
 			<div>
 				<form onSubmit={this.handleSubmit}>
 					<h3>Edit your ride</h3>
-					<p>To change the driver, destination, or pickup date, you must cancel this ride and create a new one.</p>
+					<p>To change the ride name, driver, destination, or pickup date, you must cancel this ride and create a new one.</p>
 					<label>Ride name:
-						<input name="name" type="text" placeholder="Ride name" value={ride.name}/>
+						<p>{ride.name}</p>
 					</label>
 					<label>Pickup location:
-						<input name="pickup" type="text" placeholder="Pickup location" value={ride.pickup}/>
+						<input name="pickup" type="text" placeholder="Pickup location" value={ride.pickup} onChange={this.handleChange}/>
 					</label>
 					<label>Destination:
-						<input name="destination" type="text" disabled="disabled" value={ride.destination}/>
+						<p>{ride.destination}</p>
 					</label>
 					<label>Pickup date:
-						<input name="pickup_date" type="date" disabled="disabled" value={ride.pickup_date}/>
+						<p>{ride.pickup_date}</p>
 					</label>
 					<label>Pickup time:
-						<input name="pickup_time" type="time" placeholder="Pickup time" value={ride.pickup_time}/>
+						<input name="pickup_time" type="time" placeholder="Pickup time" value={ride.pickup_time} onChange={this.handleChange}/>
 					</label>
 					<label>Driver:
-						<input name="driver_user_id" type="text" disabled="disabled" value={this.state.driver.username}/>
+						<p>{this.state.driver.username}</p>
 					</label>
 					<label>Number of available seats:
-						<input name="passenger_slots" type="number" placeholder="Available seats" value={ride.passenger_slots}/>
+						<input name="passenger_slots" type="number" placeholder="Available seats" value={ride.passenger_slots} onChange={this.handleChange}/>
 					</label>
 					<label>Passengers:
 						<ul>
