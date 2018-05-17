@@ -15,7 +15,7 @@ const delUser = async (reState,e) => {
 
 function DeleteUser({id, reState}) {
 	return (
-		<button className="btn" id={id} onClick={delUser.bind(null,reState)}>Delete</button>
+		<button className="modal-btn" id={id} onClick={delUser.bind(null,reState)}>Delete</button>
 	);
 }
 

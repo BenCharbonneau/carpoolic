@@ -6,6 +6,17 @@
 	font-weight: 400;
 }
 
+.from-list {
+	border: 1px black solid;
+	background-color: white;
+	margin-bottom: 20px;
+}
+
+.from-list td {
+	padding: 15px;
+	color: black;
+}
+
 .from-modal {
 	display: flex;
 	flex-direction: column;

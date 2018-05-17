@@ -6,7 +6,7 @@ function Modal({comp,cssClass,close}) {
 		<div className={cssClass}>
 			<div className="modal">
 				{comp}
-				<button className="ok-btn" onClick={close}>OK</button>
+				<button className="modal-btn" className="ok-btn" onClick={close}>OK</button>
 			</div>
 		</div>
 	);

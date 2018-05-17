@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ShowRide from '../ShowRide';
 import Modal from '../Modal';
+import './style.css';
 
 class RideListContainer extends Component {
   constructor() {
@@ -31,15 +32,15 @@ class RideListContainer extends Component {
     const showComp = (this.state.ride >= 0) ? <table><tbody><ShowRide userId={this.props.userId} cssClass="from-modal" rideId={this.state.ride} close={this.rideHide} /></tbody></table> : ''
 
     return (
-      <div>
-        <table className="list-container">
+      <div className="list-container">
+        <h3>Rides</h3>
+        <table>
           <thead>
             <tr>
               <th>Ride Name</th>
               <th>Pickup Location</th>
               <th>Destination</th>
               <th>Pickup Time</th>
-              <th>Available Seats</th>
               <th>Driver</th>
             </tr>
           </thead>

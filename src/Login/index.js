@@ -23,7 +23,6 @@ class Login extends Component {
 			if (label.tagName === 'LABEL') {
 				input = label.children[0];
 			}
-			console.log(input);
 
 			if (input.name) {
 				frmVals[input.name] = input.value;
@@ -112,9 +111,6 @@ class Login extends Component {
 
 	    return (
 	      <div>
-	      	<div className="bg">
-	      	<div className="transbox"><h1> Carpoolic </h1></div>
-	      	</div>
 	      	<h2>{title}</h2>
 	      	<p>{this.state.message}</p>
 	      	<form onSubmit={this.setUsername}>

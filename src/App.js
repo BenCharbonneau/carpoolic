@@ -106,6 +106,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <div className="bg">
+            <div className="transbox"><h1> Carpoolic </h1></div>
+        </div>
         {this.state.loggedIn ?
           <div>
             <Banner id={this.state.userId} setMess={this.setMessage} nav={this.state.bannerButt} navFunc={this.showToggle} logout={this.logout} title="Carpoolic"/>

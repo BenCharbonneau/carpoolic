@@ -1,4 +1,23 @@
-#container {
+#banner {
 	display: flex;
-	justify-content: space-around;
+	justify-content: center;
+	background-color: #222222;
+	align-items: center;
+	padding: 20px;
+}
+
+#banner button {
+	margin: auto 10px;
+	max-height: 50px;
+	min-width: 100px;
+}
+
+#banner button.ok-btn {
+	margin: 5px;
+}
+
+@media (max-width: 435px) {
+	#banner button {
+		margin: 0 5px;
+	}
 }

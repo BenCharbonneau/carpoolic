@@ -2,7 +2,8 @@ import React,{Component} from 'react';
 import EditButton from '../EditButton';
 import CreateRide from '../CreateRide';
 import Modal from '../Modal';
-import '../App.css'
+import './style.css';
+
 
 class Banner extends Component {
 	constructor() {
@@ -30,13 +31,10 @@ class Banner extends Component {
 		const createComp = <CreateRide userId={this.props.id} close={this.hideModal} />
 
 		return (
-			<div id="container">
-				<div className="bg">
-	      			<div className="transbox"><h1> Carpoolic </h1></div>
-	      		</div>
-				<button className="btn" onClick={this.showModal}>Create Ride</button>
-				<button className="btn" onClick={this.props.navFunc}>{this.props.nav}</button>
-				<h1>{this.props.title}</h1>
+			<div id="banner">
+
+				<button onClick={this.showModal}>Create Ride</button>
+				<button onClick={this.props.navFunc}>{this.props.nav}</button>
 				<EditButton btnText="Edit Account" close={this.hideModal} userId={this.props.id}/>
 				<button className="btn" onClick={this.props.logout}>Logout</button>
 				<Modal cssClass={this.state.modalClass} close={this.hideModal} comp={createComp}/>
