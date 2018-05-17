@@ -67,9 +67,7 @@ class ShowRide extends Component {
 
 		const addPass = await addPassJSON.json();
 
-		await this.getRide();
-
-		console.log(addPass, " this is addPass from addPassenger")
+		await this.getRide(addPass);
 	}
 	render() {
 

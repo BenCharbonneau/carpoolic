@@ -13,7 +13,8 @@ class EditButton extends Component {
 	showEdit = () => {
 		this.setState({show: true})
 	}
-	hideEdit = () => {
+	hideEdit = (response) => {
+		this.props.close(response);
 		this.setState({show: false})
 	}
 	render() {
