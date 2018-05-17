@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Login from './Login';
-import HomePage from './HomePage';
-import SearchPage from './SearchPage';
+import RideListContainer from './RideListContainer';
 import Banner from './Banner';
 
 class App extends Component {
@@ -11,44 +10,109 @@ class App extends Component {
     this.state = {
       loggedIn: false,
       userId: -1,
-      page: '',
-      bannerButt: 'Search for Rides'
+      bannerButt: 'Search for Rides',
+      srchCrit: false,
+      rides: [],
+      message: ''
     }
   }
   setLoggedIn = (id) => {
-    this.setState({loggedIn: true, userId: id});
+    this.getRides({loggedIn: true, userId: id})
+    .catch((err) => {
+      console.log(err);
+    });
   }
   showToggle = () => {
-    if (this.state.page === '') {
-      this.setState({page: 'search', bannerButt: 'View My Rides'})
+    let bannerButt = '';
+    if (this.state.srchCrit === false) {
+      bannerButt = 'View My Rides';
     }
     else {
-      this.showHome();
+      bannerButt = 'Search for Rides';
+    }
+
+    this.getRides({bannerButt: bannerButt, srchCrit: !this.state.srchCrit})
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+  getRides = async (body={}) => {
+    try {
+
+      let userId;
+      if (body.userId) {
+        userId = body.userId;
+      }
+      else if (this.state.userId > 0) {
+        userId = this.state.userId;
+      }
+
+      let srchCrit;
+      if (body.srchCrit !== undefined) {
+        srchCrit = body.srchCrit;
+      }
+      else {
+        srchCrit = this.state.srchCrit;
+      }
+
+      if (!body.message) body.message = '';
+
+      if (srchCrit) {
+        const ridesJSON = await fetch('http://localhost:9292/rides', {
+          credentials: 'include'
+        });
+
+        const rides = await ridesJSON.json();
+
+        body.rides = rides.retrieved_rides;
+
+        this.setState(body);
+      }
+      else if (userId) {
+       const ridesJSON = await fetch('http://localhost:9292/users/' + userId + '/rides', {
+          credentials: 'include'
+        });
+
+        const rides = await ridesJSON.json();
+
+        body.rides = rides.rides;
+
+        this.setState(body);
+      }
+    }
+    catch (err) {
+      console.log(err);
     }
   }
-  showHome = () => {
-    this.setState({page: '', bannerButt: 'Search for Rides'})
+  setMessage = (response) => {
+
+    const message = {};
+    if (response) message.message = response.message;
+
+    this.getRides(message)
+    .catch((err) => {
+      console.log(err);
+    });
   }
   logout = async () => {
-    await fetch('http://localhost:9292/users/logout',{
+    const responseJSON = await fetch('http://localhost:9292/users/logout',{
       credentials: 'include'
-    })
+    });
 
-    this.setState({loggedIn: false});
+    const response = await responseJSON.json();
+
+    this.setState({loggedIn: false, message: response.message});
   }
   render() {
-
-    const page = this.state.page ? <SearchPage userId={this.state.userId} /> : 
-    <HomePage userId={this.state.userId} />
-
     return (
       <div className="App">
         {this.state.loggedIn ?
           <div>
-            <Banner id={this.state.userId} reState={this.forceUpdate.bind(this)} nav={this.state.bannerButt} navFunc={this.showToggle} logout={this.logout} title="Carpoolic"/>
-            {page}
+            <Banner id={this.state.userId} setMess={this.setMessage} nav={this.state.bannerButt} navFunc={this.showToggle} logout={this.logout} title="Carpoolic"/>
+            { this.state.message ? <p>{this.state.message}</p> : '' }
+            <RideListContainer userId={this.state.userId} rides={this.state.rides} setMess={this.setMessage}/>
           </div>:
-          <Login setLoggedIn={this.setLoggedIn}/>    
+          <Login setLoggedIn={this.setLoggedIn} mess={this.state.message}/>    
         }
       </div>
     );

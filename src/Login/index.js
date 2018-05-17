@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 class Login extends Component {
 	constructor(props) {
 		super(props);
-    	if (!this.props) this.props = {register: false};
+    	if (!this.props) this.props = {register: false, mess: ''};
 		this.state = {
-			message: '',
+			message: this.props.mess,
 			register: this.props.register
 		}
 	}

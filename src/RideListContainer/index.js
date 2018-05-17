@@ -6,40 +6,8 @@ class RideListContainer extends Component {
   constructor() {
     super();
     this.state = {
-      rides: [],
       modalClass: 'closed',
-      message: '',
       ride: -1
-    }
-  }
-  componentDidMount() {
-    this.getRides().catch((err) => {
-      console.log(err);
-    })
-  }
-  getRides = async () => {
-    try {
-      if (this.props.srchCrit) {
-        const ridesJSON = await fetch('http://localhost:9292/rides', {
-          credentials: 'include'
-        });
-
-        const rides = await ridesJSON.json();
-
-        this.setState({rides: rides.retrieved_rides});
-      }
-      else {
-       const ridesJSON = await fetch('http://localhost:9292/users/' + this.props.userId + '/rides', {
-          credentials: 'include'
-        });
-
-        const rides = await ridesJSON.json();
-      
-        this.setState({rides: rides});
-      }
-    }
-    catch (err) {
-      console.log(err);
     }
   }
   rideShow = (e) => {
@@ -48,18 +16,14 @@ class RideListContainer extends Component {
     }
   }
   rideHide = (response) => {
-    let message;
-    if (response && response.message) message = response.message
-    
-    this.setState({modalClass: 'closed', ride: -1, message: message})
-    
-    this.getRides().catch((err) => {
-      console.log(err);
-    });
+    this.props.setMess(response);
+
+    this.setState({modalClass: 'closed', ride: -1});
   }
   render() {
+    if (!this.props.rides) this.props.rides = [];
 
-    const rides = this.state.rides.map((ride) => {
+    const rides = this.props.rides.map((ride) => {
       return (
         <li key={ride.id} id={ride.id} onClick={this.rideShow}>
           <ShowRide userId={this.props.userId} fields={['name','pickup','destination','pickup_time','driver','delete']} rideId={ride.id} close={this.rideHide}/> 
@@ -71,7 +35,6 @@ class RideListContainer extends Component {
 
     return (
       <div>
-        { this.state.message ? <p>{this.state.message}</p> : '' }
         <ul>{rides}</ul>
         <Modal comp={showComp} cssClass={this.state.modalClass}/>
       </div>
