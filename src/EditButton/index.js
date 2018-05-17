@@ -13,16 +13,16 @@ class EditButton extends Component {
 	showEdit = () => {
 		this.setState({show: true})
 	}
-	hideEdit = (response) => {
-		this.props.close(response);
-		this.setState({show: false})
+	hideEdit = (response,logout) => {
+		this.props.close(response,logout);
+		this.setState({show: false});
 	}
 	render() {
 
 		let comp;
 		if (this.state.show) {
 			comp = this.props.rideId ? <EditRide id={this.props.rideId} close={this.hideEdit}/> : <EditUser id={this.props.userId} close={this.hideEdit}/>
-			comp = <Modal comp={comp} cssClass="open"/>
+			comp = <Modal comp={comp} close={this.hideEdit} cssClass="open"/>
 		}
 		else {
 			comp = (<button onClick={this.showEdit}>{this.props.btnText}</button>)

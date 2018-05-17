@@ -101,7 +101,7 @@ class App extends Component {
 
     const response = await responseJSON.json();
 
-    this.setState({loggedIn: false, message: response.message});
+    this.setState({loggedIn: false, message: response.message, userId: -1, rides: []});
   }
   render() {
     return (
