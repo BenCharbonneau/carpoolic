@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import DeleteRide from '../DeleteRide';
 import EditButton from '../EditButton';
 import RemovePassButton from '../RemovePassButton';
+import './style.css';
 
 class ShowRide extends Component {
 	constructor() {
@@ -88,20 +89,19 @@ class ShowRide extends Component {
 			);
 		})
 		return (
-
-			<div>
-				{ this.state.message ? <p>{this.state.message}</p> : '' }
-				{ fields.includes('name') ? <p><strong>{ride.name}</strong></p> : '' }
-		    	{ fields.includes('pickup') ? <p>Pickup Location: {ride.pickup}</p> : '' }
-		    	{ fields.includes('destination') ? <p>Destination: {ride.destination}</p> : '' }
-		    	{ fields.includes('pickup_time') ? <p>Pickup Time: {ride.pickup_date} {ride.pickup_time}</p> : '' }
-		    	{ fields.includes('passengers') ? <p>Available Seats: {ride.passenger_slots}</p> : '' }
-		    	{ fields.includes('driver') ? <p>Driver: {driver}</p> : '' }
-		    	{ fields.includes('passengers') ? <div><p>Passengers:</p><ul>{passengers}</ul></div> : '' }
-		    	{ fields.includes('edit') && (driver === "You") ? <EditButton rideId={ride.id} close={this.getRide} btnText="Edit" /> : '' }
-		    	{ fields.includes('delete') && (driver === "You") ? <DeleteRide id={ride.id} reState={this.props.close} /> : '' }
-		    	{ fields.includes('addPass') && (driver !== "You") && !isPassenger ? <button id={ride.id} onClick={this.addPassenger}> Claim Seat in this Ride </button> : '' }
-		    </div>
+			<tr key={ride.id} className={this.props.cssClass} onClick={this.props.rowClick} id={ride.id}>
+				{ this.state.message ? <td>{this.state.message}</td>:<td className="hidden"></td>}
+				{ fields.includes('name') ? <td><strong>{ride.name}</strong></td> : <td className="hidden"></td> }
+		    	{ fields.includes('pickup') ? <td><span>Pickup Location:</span> {ride.pickup}</td> : <td className="hidden"></td> }
+		    	{ fields.includes('destination') ? <td><span>Destination:</span> {ride.destination}</td> : <td className="hidden"></td> }
+		    	{ fields.includes('pickup_time') ? <td><span>Pickup Time:</span> {ride.pickup_date} {ride.pickup_time}</td> : <td className="hidden"></td> }
+		    	{ fields.includes('passengers') ? <td><span>Available Seats:</span> {ride.passenger_slots}</td> : <td className="hidden"></td> }
+		    	{ fields.includes('driver') ? <td><span>Driver:</span> {driver}</td> : <td className="hidden"></td> }
+		    	{ fields.includes('passengers') ? <td><p>Passengers:</p><ul>{passengers}</ul></td> : <td className="hidden"></td> }
+		    	{ fields.includes('edit') && (driver === "You") ? <td><EditButton rideId={ride.id} close={this.getRide} btnText="Edit" /></td> : <td className="hidden"></td> }
+		    	{ fields.includes('delete') && (driver === "You") ? <td><DeleteRide id={ride.id} reState={this.props.close} /></td> : <td className="hidden"></td> }
+		    	{ (fields.includes('addPass') && (driver !== "You") && !isPassenger) ? <td><button id={ride.id} onClick={this.addPassenger}>Claim Seat in this Ride</button></td> : <td className="hidden"></td> }
+		    </tr>
 	    );
 	}
 }
