@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import EditButton from '../EditButton';
 import CreateRide from '../CreateRide';
 import Modal from '../Modal';
+import './style.css';
 
 class Banner extends Component {
 	constructor() {
@@ -32,7 +33,6 @@ class Banner extends Component {
 			<div id="container">
 				<button onClick={this.showModal}>Create Ride</button>
 				<button onClick={this.props.navFunc}>{this.props.nav}</button>
-				<h1>{this.props.title}</h1>
 				<EditButton btnText="Edit Account" close={this.hideModal} userId={this.props.id}/>
 				<button onClick={this.props.logout}>Logout</button>
 				<Modal cssClass={this.state.modalClass} close={this.hideModal} comp={createComp}/>

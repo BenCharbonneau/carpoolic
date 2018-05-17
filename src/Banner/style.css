@@ -1,4 +1,19 @@
 #container {
 	display: flex;
-	justify-content: space-around;
+	justify-content: center;
+	background-color: #222222;
+	align-items: center;
+	padding: 20px;
+}
+
+#container button {
+	margin: 0 10px;
+	max-height: 50px;
+	min-width: 100px;
+}
+
+@media (max-width: 435px) {
+	#container button {
+		margin: 0 5px;
+	}
 }
