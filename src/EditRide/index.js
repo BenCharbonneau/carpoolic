@@ -124,7 +124,7 @@ class EditRide extends Component {
 						{passengers}
 						</ul>
 					</label>
-					<input type="submit" value="Submit Updates" />
+					<input className="modal-btn" type="submit" value="Submit Updates" />
 				</form>
 				<DeleteRide id={ride.id} reState={this.props.close} />
 			</div>
