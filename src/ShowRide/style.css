@@ -1,0 +1,16 @@
+.from-list span {
+	display: none;
+}
+
+.from-list strong {
+	font-weight: 400;
+}
+
+.from-modal {
+	display: flex;
+	flex-direction: column;
+}
+
+.hidden {
+	display: none;
+}
