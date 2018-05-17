@@ -21,15 +21,14 @@ class RideListContainer extends Component {
     this.setState({modalClass: 'closed', ride: -1});
   }
   render() {
-    if (!this.props.rides) this.props.rides = [];
 
-    const rides = this.props.rides.map((ride) => {
+    const rides = this.props.rides ? this.props.rides.map((ride) => {
       return (
         <li key={ride.id} id={ride.id} onClick={this.rideShow}>
           <ShowRide userId={this.props.userId} fields={['name','pickup','destination','pickup_time','driver','delete']} rideId={ride.id} close={this.rideHide}/> 
         </li>
       );
-    })
+    }) : [];
 
     const showComp = (this.state.ride >= 0) ? <ShowRide userId={this.props.userId} rideId={this.state.ride} close={this.rideHide} /> : ''
 
