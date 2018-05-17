@@ -60,16 +60,18 @@ class CreateRide extends Component {
 			}
 		}
 		
-		const driverInp = document.getElementById('driver')
-		const driverUsrnm = driverInp.value;
-		//driverInp.value = "";
-		const driver = this.state.users.find((user) => {
-			return user.username === driverUsrnm
-		})
+		// const driverInp = document.getElementById('driver')
+		// const driverUsrnm = driverInp.value;
+		// //driverInp.value = "";
+		// const driver = this.state.users.find((user) => {
+		// 	return user.username === driverUsrnm
+		// })
 
-		if (driver) {
-			body['driver_user_id'] = driver.id;
-		}
+		// if (driver) {
+		// 	body['driver_user_id'] = driver.id;
+		// }
+
+		body['driver_user_id'] = this.state.currentUser.id;
 
 		const responseJSON = await fetch('http://localhost:9292/rides',{
 			credentials: 'include',
@@ -95,20 +97,20 @@ class CreateRide extends Component {
 
 	render() {
 	
-		const inpL = this.state.driverInpLength;
-		let autoComp = this.state.autoCompUsers.map((user) => {
-			return (
-				<div key={user.id} onClick={this.saveDriverValue}>
-					<strong>{user.username.substr(0,inpL)}</strong>{user.username.substr(inpL)}
-					<input type="hidden" value={user.username} onClick={this.saveDriverValue} />
-				</div>
-			);
-		})
+		// const inpL = this.state.driverInpLength;
+		// let autoComp = this.state.autoCompUsers.map((user) => {
+		// 	return (
+		// 		<div key={user.id} onClick={this.saveDriverValue}>
+		// 			<strong>{user.username.substr(0,inpL)}</strong>{user.username.substr(inpL)}
+		// 			<input type="hidden" value={user.username} onClick={this.saveDriverValue} />
+		// 		</div>
+		// 	);
+		// })
 
-		autoComp = ( <div className="autocomplete-items">{autoComp}</div>)
+		// autoComp = ( <div className="autocomplete-items">{autoComp}</div>)
 
 		return (
-			<form onClick={this.clearAutoComp} onSubmit={this.handleSubmit}>
+			<form onSubmit={this.handleSubmit}>
 				<h3>Create your ride</h3>
 				<label>Ride name:
 					<input name="name" type="text" placeholder="Ride name"/>
@@ -125,10 +127,8 @@ class CreateRide extends Component {
 				<label>Pickup time:
 					<input name="pickup_time" type="time" placeholder="Pickup time"/>
 				</label>
-				<div className="driver-container">
 				<div>
 					Driver: {this.state.currentUser.username}
-				</div>
 				</div>
 				<label>Number of available seats:
 					<input name="passenger_slots" type="number" placeholder="Available seats"/>
