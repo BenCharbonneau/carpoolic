@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './style.css';
+import '../App.css'
 
 class CreateRide extends Component {
 	constructor() {
@@ -133,7 +134,7 @@ class CreateRide extends Component {
 				<label>Number of available seats:
 					<input name="passenger_slots" type="number" placeholder="Available seats"/>
 				</label>
-				<input type="submit" value="Create Ride" />
+				<input className="modal-btn" type="submit" value="Create Ride" />
 			</form>
 		);
 	}

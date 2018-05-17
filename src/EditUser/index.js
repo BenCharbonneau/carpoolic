@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DeleteUser from '../DeleteUser';
+import '../App.css'
 
 class EditUser extends Component {
 	constructor() {
@@ -70,7 +71,7 @@ class EditUser extends Component {
 					<label>Email:
 						<input name="email" type="email" placeholder="Email" autoComplete="email" onChange={this.handleChange} value={user.email}/>
 					</label>
-					<input type="submit" value="Submit Updates" />
+					<input className="modal-btn" type="submit" value="Submit Updates" />
 				</form>
 				<DeleteUser id={user.id} reState={this.props.close} />
 			</div>
