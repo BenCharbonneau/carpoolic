@@ -22,10 +22,29 @@
   transform: translate(-50%, -50%);
   width: 600px;
   max-width: 90%;
-  height: 400px;
+  height: 500px;
   max-height: 90%;
   background-color: white;
+  color: black;
   justify-content: center;
   overflow: scroll;
   padding: 20px;
+}
+
+button {
+  background-color: #f28c2e;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  margin: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.ok-btn {
+  width: 15vw;
+  align-self: center;
+
 }
