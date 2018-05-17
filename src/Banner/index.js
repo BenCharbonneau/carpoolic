@@ -30,11 +30,11 @@ class Banner extends Component {
 
 		return (
 			<div id="container">
-				<button onClick={this.showModal}>Create Ride</button>
-				<button onClick={this.props.navFunc}>{this.props.nav}</button>
+				<button className="btn" onClick={this.showModal}>Create Ride</button>
+				<button className="btn" onClick={this.props.navFunc}>{this.props.nav}</button>
 				<h1>{this.props.title}</h1>
 				<EditButton btnText="Edit Account" close={this.hideModal} userId={this.props.id}/>
-				<button onClick={this.props.logout}>Logout</button>
+				<button className="btn" onClick={this.props.logout}>Logout</button>
 				<Modal cssClass={this.state.modalClass} close={this.hideModal} comp={createComp}/>
 			</div>
 		);

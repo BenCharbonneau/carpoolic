@@ -21,7 +21,7 @@ const delRide = async (reState,e) => {
 function DeleteRide({id, reState}) {
 
 	return (
-		<button id={id} onClick={delRide.bind(null,reState)}>Cancel Ride</button>
+		<button className="btn" id={id} onClick={delRide.bind(null,reState)}>Cancel Ride</button>
 	);
 }
 
