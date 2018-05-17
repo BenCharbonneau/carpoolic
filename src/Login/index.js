@@ -16,8 +16,14 @@ class Login extends Component {
 
 		const inputs = e.currentTarget.children;
 		const frmVals = {};
+		let input;
 
-		for (let input of inputs) {
+		for (let label of inputs) {
+			if (label.tagName === 'LABEL') {
+				input = label.children[0];
+			}
+			console.log(input);
+
 			if (input.name) {
 				frmVals[input.name] = input.value;
 			}
@@ -62,7 +68,7 @@ class Login extends Component {
 	  	});
 
 	  	const register = await registerJSON.json();
-
+	  	console.log(register, " this is register")
 		return register;
 	}
 	flipReg = (register) => {
@@ -82,7 +88,7 @@ class Login extends Component {
 	  			[
 	         		<label key={1}> Username: <input type="text" name="username" placeholder="Username" /></label>,
 	      	 		<label key={2}> Password: <input type="password" name="password" autoComplete="off" placeholder="Password" /></label>,
-	      	 		<button class="btn" key={3} type="submit">Login</button>
+	      	 		<button className="btn" key={3} type="submit">Login</button>
 	        	]
 	  		);
 
@@ -96,7 +102,7 @@ class Login extends Component {
 	         		<label  key={1}> Username: <input type="text" name="username" placeholder="Username" /></label>,
 	         		<label  key={2}> Password: <input  type="password" name="password" autoComplete="off" placeholder="Password" /></label>,
 	         		<label  key={3}> Email: <input  type="email" name="email" autoComplete="email" placeholder="Email" /></label>,
-	         		<button class="btn" key={4} type="submit">Register</button>
+	         		<button className="btn" key={4} type="submit">Register</button>
 	        	]
 	  		);
 
@@ -105,7 +111,7 @@ class Login extends Component {
 
 	    return (
 	      <div>
-	      	<div class="bg"></div>
+	      	<div className="bg"></div>
 	      	<h1> Carpoolic </h1> 
 	      	<h2>{title}</h2>
 	      	<p>{this.state.message}</p>
@@ -113,7 +119,7 @@ class Login extends Component {
 	      		{inputs}
 	      	</form>
 	        <p onClick={this.flipReg.bind(null,register)} className="link">{link}</p>
-	        <h3 class="intro"> Carpoolic is a ride share application to make carpooling to events easier! <br /> Login or create an account to search for rides. </h3>
+	        <h3 className="intro"> Carpoolic is a ride share application to make carpooling to events easier! <br /> Login or create an account to search for rides. </h3>
 	      </div>   
 	    );
     }
