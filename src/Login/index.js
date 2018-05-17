@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './style.css';
+import '../App.css'
 
 class Login extends Component {
 	constructor(props) {
@@ -111,8 +112,9 @@ class Login extends Component {
 
 	    return (
 	      <div>
-	      	<div className="bg"></div>
-	      	<h1> Carpoolic </h1> 
+	      	<div className="bg">
+	      	<div className="transbox"><h1> Carpoolic </h1></div>
+	      	</div>
 	      	<h2>{title}</h2>
 	      	<p>{this.state.message}</p>
 	      	<form onSubmit={this.setUsername}>

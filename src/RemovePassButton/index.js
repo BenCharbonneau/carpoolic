@@ -1,4 +1,5 @@
 import React from 'react'
+import "../App.css"
 
 const remPass = async (reState,e) => {
 	const id = e.currentTarget.id.split('_')
@@ -17,7 +18,7 @@ const remPass = async (reState,e) => {
 
 function RemovePassButton({userId, rideId, reState}) {
 	return (
-		<button id={userId+"_"+rideId} onClick={remPass.bind(null,reState)}>X</button>
+		<button className="cancel-btn" id={userId+"_"+rideId} onClick={remPass.bind(null,reState)}>X</button>
 	);
 }
 

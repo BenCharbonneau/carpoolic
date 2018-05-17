@@ -1,4 +1,5 @@
 import React from 'react';
+import '../App.css'
 
 const delRide = async (reState,e) => {
 	try{
@@ -21,7 +22,7 @@ const delRide = async (reState,e) => {
 function DeleteRide({id, reState}) {
 
 	return (
-		<button className="btn" id={id} onClick={delRide.bind(null,reState)}>Cancel Ride</button>
+		<button className="cancel-btn" id={id} onClick={delRide.bind(null,reState)}>Cancel Ride</button>
 	);
 }
 

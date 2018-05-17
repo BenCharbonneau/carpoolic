@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import EditButton from '../EditButton';
 import CreateRide from '../CreateRide';
 import Modal from '../Modal';
+import '../App.css'
 
 class Banner extends Component {
 	constructor() {
@@ -30,6 +31,9 @@ class Banner extends Component {
 
 		return (
 			<div id="container">
+				<div className="bg">
+	      			<div className="transbox"><h1> Carpoolic </h1></div>
+	      		</div>
 				<button className="btn" onClick={this.showModal}>Create Ride</button>
 				<button className="btn" onClick={this.props.navFunc}>{this.props.nav}</button>
 				<h1>{this.props.title}</h1>
