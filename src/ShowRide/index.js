@@ -55,6 +55,20 @@ class ShowRide extends Component {
 
 		this.setState({ride: ride.found_ride, driver: driver, passengers: passengers, message: message});
 	}
+	addPassenger = async () => {
+
+		const rideId = this.props.rideId;
+		const userId = this.props.userId
+
+		const addPassJSON = await fetch('http://localhost:9292/rides/' + rideId + '/adduser/' + userId, {
+			credentials: 'include',
+			method: 'PUT'
+		})
+
+		const addPass = await addPassJSON.json();
+
+		console.log(addPass, " this is addPass from addPassenger")
+	}
 	render() {
 
 		const ride = this.state.ride
@@ -83,7 +97,7 @@ class ShowRide extends Component {
 		    	{ fields.includes('edit') && (driver === "You") ? <EditButton rideId={ride.id} close={this.getRide} btnText="Edit" /> : '' }
 		    	{ fields.includes('delete') && (driver === "You") ? <DeleteRide id={ride.id} reState={this.props.close} /> : '' }
 		    	{ fields.includes('ok') ? <button onClick={this.props.close}>OK</button> : '' }
-		    	{ fields.includes('addPass') ? <button> Claim Seat in this Ride </button> : '' }
+		    	{ fields.includes('addPass') ? <button id={ride.id} onClick={this.addPassenger}> Claim Seat in this Ride </button> : '' }
 		    </div>
 	    );
 	}
