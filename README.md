@@ -11,7 +11,7 @@ Carpoolic is a ride share application to make carpooling to events easier! Drive
 ## Technologies used:
 
   * HTML, CSS, REACT, and JavaScript
-  * The Carpoolic APIs
+  * The Carpoolic APIs (https://github.com/agraham0925/carpoolic-api)
 
 
 ## The approach taken:
@@ -50,32 +50,32 @@ We started planning with our user stories. Once we knew what our user's needed t
 
 ## Wireframes:
 
-Login page: 
-![alt text](https://raw.githubusercontent.com/BenCharbonneau/carpoolic/master/public/wireframes/login.png)
+Login Page: 
+![Login Page](https://raw.githubusercontent.com/BenCharbonneau/carpoolic/master/public/wireframes/login.png)
 
-Register page: 
-![alt text](https://raw.githubusercontent.com/BenCharbonneau/carpoolic/master/public/wireframes/register.png)
+Register Page: 
+![Register Page](https://raw.githubusercontent.com/BenCharbonneau/carpoolic/master/public/wireframes/register.png)
 
 Home Page: 
-![alt text](https://raw.githubusercontent.com/BenCharbonneau/carpoolic/master/public/wireframes/my-rides.png)
+![Home Page](https://raw.githubusercontent.com/BenCharbonneau/carpoolic/master/public/wireframes/my-rides.png)
 
 Ride List: 
-![alt text](https://raw.githubusercontent.com/BenCharbonneau/carpoolic/master/public/wireframes/ride-list.png)
+![Ride List](https://raw.githubusercontent.com/BenCharbonneau/carpoolic/master/public/wireframes/ride-list.png)
 
 Create Ride: 
-![alt text](https://raw.githubusercontent.com/BenCharbonneau/carpoolic/master/public/wireframes/create-ride.png)
+![Create Ride](https://raw.githubusercontent.com/BenCharbonneau/carpoolic/master/public/wireframes/create-ride.png)
 
 Edit Ride: 
-![alt text](https://raw.githubusercontent.com/BenCharbonneau/carpoolic/master/public/wireframes/edit-ride.png)
+![Edit Ride](https://raw.githubusercontent.com/BenCharbonneau/carpoolic/master/public/wireframes/edit-ride.png)
 
 Ride Details for a Driver: 
-![alt text](https://raw.githubusercontent.com/BenCharbonneau/carpoolic/master/public/wireframes/show-ride-driver.png)
+![Ride Details](https://raw.githubusercontent.com/BenCharbonneau/carpoolic/master/public/wireframes/show-ride-driver.png)
 
 Ride Details for a Passenger: 
-![alt text](https://raw.githubusercontent.com/BenCharbonneau/carpoolic/master/public/wireframes/show-ride-passenger.png)
+![Ride Details](https://raw.githubusercontent.com/BenCharbonneau/carpoolic/master/public/wireframes/show-ride-passenger.png)
 
 Edit User: 
-![alt text](https://raw.githubusercontent.com/BenCharbonneau/carpoolic/master/public/wireframes/edit-user.png)
+![Edit User](https://raw.githubusercontent.com/BenCharbonneau/carpoolic/master/public/wireframes/edit-user.png)
 
 
 

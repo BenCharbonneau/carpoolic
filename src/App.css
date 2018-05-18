@@ -93,3 +93,8 @@ input {
   padding: 20px;
   display: inline-block;
 }
+
+.form-alert {
+  color: red;
+  font-size: 10px;
+}
