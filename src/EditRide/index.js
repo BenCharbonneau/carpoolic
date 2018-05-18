@@ -27,7 +27,7 @@ class EditRide extends Component {
 		})
 	}
 	getRide = async () => {
-		const rideJSON = await fetch('http://localhost:9292/rides/'+this.props.id,{
+		const rideJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'rides/'+this.props.id,{
 			credentials: 'include'
 		})
 
@@ -63,7 +63,7 @@ class EditRide extends Component {
 			}
 		}
 
-		const responseJSON = await fetch("http://localhost:9292/rides/"+this.props.id,{
+		const responseJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'rides/'+this.props.id,{
 			credentials: 'include',
 			method: 'PUT',
 			body: JSON.stringify(body)

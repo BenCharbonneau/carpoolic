@@ -39,7 +39,7 @@ class ShowRide extends Component {
 
 		const rideId = this.props.rideId;
 
-		const rideJSON = await fetch('http://localhost:9292/rides/' + rideId, {
+		const rideJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'rides/' + rideId, {
 			credentials: 'include'
 		})
 
@@ -67,7 +67,7 @@ class ShowRide extends Component {
 		const rideId = this.props.rideId;
 		const userId = this.props.userId
 
-		const addPassJSON = await fetch('http://localhost:9292/rides/' + rideId + '/adduser/' + userId, {
+		const addPassJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'rides/' + rideId + '/adduser/' + userId, {
 			credentials: 'include',
 			method: 'PUT'
 		})

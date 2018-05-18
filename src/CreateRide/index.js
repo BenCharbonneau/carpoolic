@@ -20,7 +20,7 @@ class CreateRide extends Component {
 		})
 	}
 	getUsers = async () => {
-		const usersJSON = await fetch('http://localhost:9292/users',{
+		const usersJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'users',{
 			credentials: 'include',
 		})
 
@@ -119,7 +119,7 @@ class CreateRide extends Component {
 
 		body['driver_user_id'] = this.state.currentUser.id;
 
-		const responseJSON = await fetch('http://localhost:9292/rides',{
+		const responseJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'rides',{
 			credentials: 'include',
 			method: "POST",
 			body: JSON.stringify(body)

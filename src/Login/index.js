@@ -47,7 +47,7 @@ class Login extends Component {
 		}
 	}
 	checkPassword = async (username, password) => {
-		const loginJSON = await fetch('http://localhost:9292/users/login',{
+		const loginJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'users/login',{
 			method: "POST",
 			credentials: 'include',
 			body: JSON.stringify({
@@ -61,7 +61,7 @@ class Login extends Component {
 		return login
 	}
 	createUser = async (frmVals) => {
-	  	const registerJSON = await fetch('http://localhost:9292/users/register',{
+	  	const registerJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'users/register',{
 	  	  method: "POST",
 	  	  credentials: 'include',
 	  	  body: JSON.stringify(frmVals)

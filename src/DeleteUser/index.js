@@ -2,7 +2,7 @@ import React from 'react';
 
 const delUser = async (reState,e) => {
 	const id = e.currentTarget.id
-	const responseJSON = await fetch('http://localhost:9292/users/' + id, {
+	const responseJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'users/' + id, {
 		credentials: 'include',
 		method: "DELETE"
 	});
