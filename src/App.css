@@ -13,8 +13,12 @@ input {
   width: 100vw;
 }
 
-* {
+strong,span,td {
   text-transform: capitalize;
+}
+
+div, p, input {
+  text-transform: none;
 }
 
 .App {
