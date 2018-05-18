@@ -75,11 +75,34 @@ class EditRide extends Component {
 	}
 	handleChange = (e) => {
 		const name = e.currentTarget.name;
+
+		if (name === 'passenger_slots') {
+			this.verifyPassengers(e);
+		}
+
 		const value = e.currentTarget.value;
 		const ride = this.state.ride;
 		ride[name] = value
 
 		this.setState({ ride: ride });
+	}
+	verifyPassengers = (e) => {
+		const input = e.currentTarget;
+		const label = e.currentTarget.parentElement;
+
+		if (label.children.length > 1) {
+			label.children[1].remove();
+		}
+
+		if (input.value < 1) {
+			input.value = 1;
+
+			const div = document.createElement('div');
+			div.classList.add("form-alert");
+			div.innerText = "The passenger slots must be greater than 0.";
+
+			label.appendChild(div);
+		}
 	}
 	render() {
 		const ride = this.state.ride;
