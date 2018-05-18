@@ -6,7 +6,7 @@ const remPass = async (reState,e) => {
 	const userId = id[0];
 	const rideId = id[1];
 	console.log(rideId,userId,"remove passenger");
-	const responseJSON = await fetch('http://localhost:9292/rides/'+rideId+'/removeuser/'+userId,{
+	const responseJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'rides/'+rideId+'/removeuser/'+userId,{
 		credentials: 'include',
 		method: 'DELETE'
 	});

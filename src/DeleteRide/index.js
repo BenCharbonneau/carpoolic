@@ -5,7 +5,7 @@ const delRide = async (reState,e) => {
 	try{
 		const id = e.currentTarget.id;
 
-		const cancelRide = await fetch('http://localhost:9292/rides/' + id, {
+		const cancelRide = await fetch(process.env.REACT_APP_DEV_API_URL+'rides/' + id, {
 			credentials: 'include',
 			method: "DELETE"
 		});

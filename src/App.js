@@ -58,7 +58,7 @@ class App extends Component {
       if (!body.message) body.message = '';
 
       if (srchCrit) {
-        const ridesJSON = await fetch('http://localhost:9292/rides', {
+        const ridesJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'rides', {
           credentials: 'include'
         });
 
@@ -69,7 +69,7 @@ class App extends Component {
         this.setState(body);
       }
       else if (userId) {
-       const ridesJSON = await fetch('http://localhost:9292/users/' + userId + '/rides', {
+       const ridesJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'users/' + userId + '/rides', {
           credentials: 'include'
         });
 
@@ -95,7 +95,7 @@ class App extends Component {
     });
   }
   logout = async () => {
-    const responseJSON = await fetch('http://localhost:9292/users/logout',{
+    const responseJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'users/logout',{
       credentials: 'include'
     });
 

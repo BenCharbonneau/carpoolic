@@ -18,7 +18,7 @@ class EditUser extends Component {
 		})
 	}
 	getUser = async () => {
-		const userJSON = await fetch('http://localhost:9292/users/'+this.props.id,{
+		const userJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'users/'+this.props.id,{
 			credentials: 'include'
 		})
 
@@ -45,7 +45,7 @@ class EditUser extends Component {
 			}
 		}
 
-		const responseJSON = await fetch('http://localhost:9292/users/'+this.props.id,{
+		const responseJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'users/'+this.props.id,{
 			credentials: 'include',
 			method: 'PUT',
 			body: JSON.stringify(body)
