@@ -8,7 +8,10 @@ class ShowRide extends Component {
 	constructor() {
 		super();
 		this.state = {
-			ride: {},
+			ride: {
+				pickup_date: '',
+				pickup_time: ''
+			},
 			driver: {},
 			passengers: [],
 			message: '',
@@ -54,6 +57,9 @@ class ShowRide extends Component {
 			return user !== driver;
 		})
 
+		ride.found_ride.pickup_time = this.fmtTime(ride.found_ride.pickup_time);
+		ride.found_ride.pickup_date = this.fmtDate(ride.found_ride.pickup_date);
+
 		this.setState({ride: ride.found_ride, driver: driver, passengers: passengers, message: message});
 	}
 	addPassenger = async () => {
@@ -70,9 +76,32 @@ class ShowRide extends Component {
 
 		await this.getRide(addPass);
 	}
+	fmtTime = (time) => {
+		let hour = parseInt(time.slice(0,2),10);
+		let AMPM;
+		if (hour === 0) {
+			hour = 12;
+			AMPM = " AM";
+		}
+		else if (hour > 12) {
+			hour = hour - 12;
+			AMPM = " PM";
+		}
+		else {
+			AMPM = " AM";
+		}
+
+		return hour + time.slice(2) + AMPM;
+	}
+	fmtDate = (date) => {
+		const year = date.slice(0,4);
+
+		return date.slice(5) + "-" + year;
+	}
 	render() {
 
 		const ride = this.state.ride
+
 		const fields = this.state.fields;
 
 		const driver = (ride.driver_user_id === this.props.userId) ? "You" : this.state.driver.username;

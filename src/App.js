@@ -107,7 +107,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="bg">
-            <div className="transbox"><h1> Carpoolic </h1></div>
+            <h1 className="transbox">Carpoolic</h1>
         </div>
         {this.state.loggedIn ?
           <div>

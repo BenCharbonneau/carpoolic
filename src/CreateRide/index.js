@@ -32,21 +32,53 @@ class CreateRide extends Component {
 
 		this.setState({currentUser: driver, users: users.users})
 	}
-	handleChange = async (e) => {
-		const name = e.currentTarget.value
-		let i = 0
-		const autoCompUsers = [];
-		for (let user of this.state.users) {
-			if (user.username.substr(0,name.length).toUpperCase() === name.toUpperCase()) {
-				if (i < 10) {
-					autoCompUsers.push(user)
-				}
-				i++;
-			}
+	verifyDate = (e) => {
+		const input = e.currentTarget;
+		const label = input.parentElement;
+
+		if (label.children.length > 1) {
+			label.children[1].remove();
 		}
 
-		this.setState({autoCompUsers: autoCompUsers, driverInpLength: name.length});
+
+		const date = new Date(this.fmtDate(input.value));
+		const today = new Date();
+		today.setHours(0,0,0,0);
+
+		if (today.getTime() > date.getTime()) {
+
+			const div = document.createElement('div');
+			div.innerText = "The date must be a future date.";
+
+			label.appendChild(div);
+		}
 	}
+	fmtDate = (date) => {
+		const year = date.slice(0,4);
+
+		return date.slice(5) + "-" + year;
+	}
+	verifyPassengers = (e) => {
+		const input = e.currentTarget;
+		if (input.value < 1) {
+			input.value = 1;
+		}
+	}
+	// handleChange = async (e) => {
+	// 	const name = e.currentTarget.value
+	// 	let i = 0
+	// 	const autoCompUsers = [];
+	// 	for (let user of this.state.users) {
+	// 		if (user.username.substr(0,name.length).toUpperCase() === name.toUpperCase()) {
+	// 			if (i < 10) {
+	// 				autoCompUsers.push(user)
+	// 			}
+	// 			i++;
+	// 		}
+	// 	}
+
+	// 	this.setState({autoCompUsers: autoCompUsers, driverInpLength: name.length});
+	// }
 	handleSubmit = async (e) => {
 		e.preventDefault();
 
@@ -57,7 +89,7 @@ class CreateRide extends Component {
 			input = label.children[0]
 			if (input && input.name) {
 				body[input.name] = input.value;
-				//input.value = "";
+				input.value = "";
 			}
 		}
 		
@@ -123,7 +155,7 @@ class CreateRide extends Component {
 					<input name="destination" type="text" placeholder="Destination"/>
 				</label>
 				<label>Pickup date:
-					<input name="pickup_date" type="date" placeholder="Pickup date"/>
+					<input name="pickup_date" type="date" onChange={this.verifyDate} placeholder="Pickup date"/>
 				</label>
 				<label>Pickup time:
 					<input name="pickup_time" type="time" placeholder="Pickup time"/>
@@ -132,7 +164,7 @@ class CreateRide extends Component {
 					Driver: {this.state.currentUser.username}
 				</div>
 				<label>Number of available seats:
-					<input name="passenger_slots" type="number" placeholder="Available seats"/>
+					<input name="passenger_slots" type="number" onChange={this.verifyPassengers} placeholder="Available seats"/>
 				</label>
 				<input className="modal-btn" type="submit" value="Create Ride" />
 			</form>
