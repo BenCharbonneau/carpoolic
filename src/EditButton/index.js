@@ -25,7 +25,7 @@ class EditButton extends Component {
 			comp = <Modal comp={comp} close={this.hideEdit} cssClass="open"/>
 		}
 		else {
-			comp = (<button className="btn" onClick={this.showEdit}>{this.props.btnText}</button>)
+			comp = (<button className="modal-btn" onClick={this.showEdit}>{this.props.btnText}</button>)
 		}
 		
 		return (

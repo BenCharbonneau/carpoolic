@@ -11,6 +11,9 @@ input {
   background-color: #f28c2e;
   color: white;
   width: 100vw;
+  
+* {
+  text-transform: capitalize;
 }
 
 .App {
@@ -48,17 +51,6 @@ input {
   color: white;
   padding: 15px 32px;
   margin: 5px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-}
-
-.btn {
-  background-color: white;
-  border: none;
-  color: #f28c2e;
-  padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
