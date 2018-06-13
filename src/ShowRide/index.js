@@ -15,30 +15,30 @@ class ShowRide extends Component {
 			driver: {},
 			passengers: [],
 			message: '',
+			//The data to show on the show page. This can be overridden by props.
 			fields: ['name','pickup','destination','pickup_time','driver','passengers','delete','edit', 'addPass']
 		}
 	}
 	componentDidMount() {
-
+		//Get information for the ride to show from the server
 		this.getRide()
 		.then(() => {
-			//let fields;
 			if (this.props.fields) {
-				//fields = this.state.fields.filter(field => !this.props.exclude.includes(field));
 				this.setState({fields: this.props.fields});
 			}
-
 		})
 		.catch((err) => {
 			console.log(err);
 		})
 	}
 	getRide = async (response) => {
+		//set up any messages that need to be displayed
 		let message;
     	if (response && response.message) message = response.message
 
 		const rideId = this.props.rideId;
 
+		//get the ride from the server
 		const rideJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'rides/' + rideId, {
 			credentials: 'include'
 		})
@@ -47,6 +47,7 @@ class ShowRide extends Component {
 		
 		const users = ride.passenger_ids;
 
+		//separate out the driver and the passengers from the users list for the ride
 		let driver = users.find((user) => {
 			return user.id === ride.found_ride.driver_user_id
 		})
@@ -57,13 +58,15 @@ class ShowRide extends Component {
 			return user !== driver;
 		})
 
+		//format the date and time data
 		ride.found_ride.pickup_time = this.fmtTime(ride.found_ride.pickup_time);
 		ride.found_ride.pickup_date = this.fmtDate(ride.found_ride.pickup_date);
 
+		//add the ride to state
 		this.setState({ride: ride.found_ride, driver: driver, passengers: passengers, message: message});
 	}
 	addPassenger = async () => {
-
+		//add a passenger to the ride
 		const rideId = this.props.rideId;
 		const userId = this.props.userId
 
@@ -104,6 +107,7 @@ class ShowRide extends Component {
 
 		const fields = this.state.fields;
 
+		//determine if the current user is the driver or the passenger
 		const driver = (ride.driver_user_id === this.props.userId) ? "You" : this.state.driver.username;
 		let isPassenger = false;
 		const passengers = this.state.passengers.map((passenger) => {

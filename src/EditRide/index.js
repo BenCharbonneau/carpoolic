@@ -22,11 +22,13 @@ class EditRide extends Component {
 		}
 	}
 	componentDidMount() {
+		//get the ride information from the server and save it to state
 		this.getRide().catch((err) => {
 			console.log(err);
 		})
 	}
 	getRide = async () => {
+		//get the ride information from the server
 		const rideJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'rides/'+this.props.id,{
 			credentials: 'include'
 		})
@@ -35,6 +37,7 @@ class EditRide extends Component {
 
 		const users = ride.passenger_ids
 
+		//split out the users for the ride into the driver and the passengers
 		const driver = users.find((user) => {
 			return user.id === ride.found_ride.driver_user_id
 		})
@@ -43,16 +46,19 @@ class EditRide extends Component {
 			return user !== driver;
 		})
 
+		//add the ride to state
 		this.setState({ride: ride.found_ride, driver: driver, passengers: passengers});
 	}
 	handleSubmit = async (e) => {
 		e.preventDefault();
 
+		//make sure that we don't submit updates if the user just removes a passenger
 		const submitElem = document.activeElement
 		if (submitElem.tagName === 'BUTTON' && submitElem.innerText === 'X') {
 			return false;
 		}
 
+		//get the user's inputs from the form
 		const labels = e.currentTarget.children;
 		let input;
 		let body = {};
@@ -63,6 +69,7 @@ class EditRide extends Component {
 			}
 		}
 
+		//send the updates to the server
 		const responseJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'rides/'+this.props.id,{
 			credentials: 'include',
 			method: 'PUT',
@@ -71,9 +78,11 @@ class EditRide extends Component {
 
 		const response = responseJSON.json();
 
+		//close the edit modal and show any messages from the server
 		this.props.close(response);
 	}
 	handleChange = (e) => {
+		//update state with any changes that the user is making in the form
 		const name = e.currentTarget.name;
 
 		if (name === 'passenger_slots') {
@@ -81,12 +90,13 @@ class EditRide extends Component {
 		}
 
 		const value = e.currentTarget.value;
-		const ride = this.state.ride;
+		const ride = Object.assign(this.state.ride);
 		ride[name] = value
 
 		this.setState({ ride: ride });
 	}
 	verifyPassengers = (e) => {
+		//Verify that the user doesn't set the number of passengers below 0
 		const input = e.currentTarget;
 		const label = e.currentTarget.parentElement;
 
@@ -95,7 +105,8 @@ class EditRide extends Component {
 		}
 
 		if (input.value < 1) {
-			input.value = 1;
+			//If the user sets the passenger slots value too low, show an error message
+			input.value = '';
 
 			const div = document.createElement('div');
 			div.classList.add("form-alert");
@@ -107,6 +118,7 @@ class EditRide extends Component {
 	render() {
 		const ride = this.state.ride;
 
+		//build the list of passengers for the ride
 		const passengers = this.state.passengers.map((passenger) => {
 			return (
 				<li key={passenger.id}>

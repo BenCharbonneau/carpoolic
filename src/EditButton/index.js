@@ -11,9 +11,11 @@ class EditButton extends Component {
 		}
 	}
 	showEdit = () => {
+		//show the edit modal
 		this.setState({show: true})
 	}
 	hideEdit = (response,logout) => {
+		//close the modal and show the edit button as well as any messages from the server
 		this.props.close(response,logout);
 		this.setState({show: false});
 	}

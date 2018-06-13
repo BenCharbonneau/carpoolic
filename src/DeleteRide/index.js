@@ -2,6 +2,7 @@ import React from 'react';
 import '../App.css'
 
 const delRide = async (reState,e) => {
+	//delete the ride and send back any messages from the server
 	try{
 		const id = e.currentTarget.id;
 

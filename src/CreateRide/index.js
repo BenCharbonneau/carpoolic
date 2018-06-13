@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './style.css';
 import '../App.css'
 
+//There is currently a lot of commented out code in this component.
+//It was going to be used for an autocomplete feature that we didn't have time to implement.
 class CreateRide extends Component {
 	constructor() {
 		super();
@@ -15,11 +17,14 @@ class CreateRide extends Component {
 		}
 	}
 	componentDidMount() {
+		//get all users from the server
 		this.getUsers().catch((err) => {
 			console.log(err);
 		})
 	}
 	getUsers = async () => {
+		//Get all users from the server and save off the current user's information.
+		//The current user will be used as the driver later.
 		const usersJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'users',{
 			credentials: 'include',
 		})
@@ -33,6 +38,7 @@ class CreateRide extends Component {
 		this.setState({currentUser: driver, users: users.users})
 	}
 	verifyDate = (e) => {
+		//Verify that the entered date is greater than today. If it isn't, warn the user.
 		const input = e.currentTarget;
 		const label = input.parentElement;
 
@@ -60,6 +66,7 @@ class CreateRide extends Component {
 		return date.slice(5) + "-" + year;
 	}
 	verifyPassengers = (e) => {
+		//Verify that the number of available passenger slots is greater than 0.
 		const input = e.currentTarget;
 		const label = e.currentTarget.parentElement;
 
@@ -68,7 +75,7 @@ class CreateRide extends Component {
 		}
 
 		if (input.value < 1) {
-			input.value = 1;
+			input.value = '';
 
 			const div = document.createElement('div');
 			div.classList.add("form-alert");
@@ -95,6 +102,7 @@ class CreateRide extends Component {
 	handleSubmit = async (e) => {
 		e.preventDefault();
 
+		//Get the user's inputs from the form.
 		const labels = e.currentTarget.children;
 		let input;
 		let body = {};
@@ -117,8 +125,10 @@ class CreateRide extends Component {
 		// 	body['driver_user_id'] = driver.id;
 		// }
 
+		//Get the driver's id from state.
 		body['driver_user_id'] = this.state.currentUser.id;
 
+		//Send the new ride information to the server
 		const responseJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'rides',{
 			credentials: 'include',
 			method: "POST",
@@ -127,19 +137,20 @@ class CreateRide extends Component {
 
 		const response = await responseJSON.json();
 
+		//Close the create modal and show any messages from the server.
 		this.props.close(response);
 	}
-	saveDriverValue = (e) => {
+	// saveDriverValue = (e) => {
 
-		document.getElementById('driver').value = e.currentTarget.children[1].value
+	// 	document.getElementById('driver').value = e.currentTarget.children[1].value
 
-		this.setState({autoCompUsers: [], driverInpLength: 0})
-	}
-	clearAutoComp = (e) => {
-		if (e.target.id !== 'driver') {
-			this.setState({autoCompUsers: [], driverInpLength: 0})
-		}
-	}
+	// 	this.setState({autoCompUsers: [], driverInpLength: 0})
+	// }
+	// clearAutoComp = (e) => {
+	// 	if (e.target.id !== 'driver') {
+	// 		this.setState({autoCompUsers: [], driverInpLength: 0})
+	// 	}
+	// }
 
 	render() {
 	

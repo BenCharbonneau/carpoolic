@@ -1,5 +1,7 @@
 /* CSS in this section borrowed from w3schools how to doc on setting up autocomplete
 https://www.w3schools.com/howto/howto_js_autocomplete.asp
+
+This CSS was mostly commented out when we decided not to use autocomplete for now
 */
 
 * { box-sizing: border-box; }

@@ -1,6 +1,7 @@
 import React from 'react';
 
 const delUser = async (reState,e) => {
+	//delete the user and log them out
 	const id = e.currentTarget.id
 	const responseJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'users/' + id, {
 		credentials: 'include',

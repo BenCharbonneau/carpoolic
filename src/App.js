@@ -17,12 +17,14 @@ class App extends Component {
     }
   }
   setLoggedIn = (id) => {
+    //Get the rides for the user and set loggedIn to true in state
     this.getRides({loggedIn: true, userId: id})
     .catch((err) => {
       console.log(err);
     });
   }
   showToggle = () => {
+    //Toggle the text for the menu buttons based on whether the user is viewing their rides or searching for other users' rides
     let bannerButt = '';
     if (this.state.srchCrit === false) {
       bannerButt = 'View My Rides';
@@ -31,12 +33,15 @@ class App extends Component {
       bannerButt = 'Search for Rides';
     }
 
+    //Get the rides to show to the user and set the button text in state
     this.getRides({bannerButt: bannerButt, srchCrit: !this.state.srchCrit})
     .catch((err) => {
       console.log(err);
     });
   }
   getRides = async (body={}) => {
+    //Get either all rides or a user's rides from the server using a fetch
+    //In the parameters, accept an object that can be added to state
     try {
 
       let userId;
@@ -57,6 +62,7 @@ class App extends Component {
 
       if (!body.message) body.message = '';
 
+      //If the user is searching rides, get all rides. This will be updated later to search based on search criteria.
       if (srchCrit) {
         const ridesJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'rides', {
           credentials: 'include'
@@ -68,6 +74,7 @@ class App extends Component {
 
         this.setState(body);
       }
+      //Otherwise, get the rides for the logged in user
       else if (userId) {
        const ridesJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'users/' + userId + '/rides', {
           credentials: 'include'
@@ -85,7 +92,7 @@ class App extends Component {
     }
   }
   setMessage = (response) => {
-
+    //Set a message to be added to state and get the user's rides again
     const message = {};
     if (response) message.message = response.message;
 
@@ -95,6 +102,7 @@ class App extends Component {
     });
   }
   logout = async () => {
+    //log a user out and reset the state of the app
     const responseJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'users/logout',{
       credentials: 'include'
     });

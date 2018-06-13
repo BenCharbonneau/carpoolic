@@ -13,28 +13,33 @@ class EditUser extends Component {
 		}
 	}
 	componentDidMount() {
+		//get the user's information from the server and put it in state
 		this.getUser().catch((err) => {
 			console.log(err);
 		})
 	}
 	getUser = async () => {
+		//get the user's information from the server
 		const userJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'users/'+this.props.id,{
 			credentials: 'include'
 		})
 
 		const user = await userJSON.json();
 
+		//put the user's information in state
 		this.setState({user: user.user});
 	}
 	handleChange = (e) => {
-		const body = this.state.user;
+		//update state with any changes that the user makes to their information
+		const body = Object.assign(this.state.user);
 		body[e.currentTarget.name] = e.currentTarget.value;
 
-		this.setState({})
+		this.setState({ user: body })
 	}
 	handleSubmit = async (e) => {
 		e.preventDefault();
 
+		//get the user's inputs from the form
 		const labels = e.currentTarget.children;
 		let input;
 		let body = {};
@@ -45,6 +50,7 @@ class EditUser extends Component {
 			}
 		}
 
+		//send the updates to the server
 		const responseJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'users/'+this.props.id,{
 			credentials: 'include',
 			method: 'PUT',
@@ -53,6 +59,7 @@ class EditUser extends Component {
 
 		const response = await responseJSON.json();
 
+		//close the edit modal and send along any messages from the server
 		this.props.close(response);
 	}
 	render() {

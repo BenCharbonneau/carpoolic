@@ -11,7 +11,7 @@ Carpoolic is a ride share application to make carpooling to events easier! Drive
 ## Technologies used:
 
   * HTML, CSS, REACT, and JavaScript
-  * The Carpoolic APIs (https://github.com/agraham0925/carpoolic-api)
+  * The Carpoolic APIs (https://github.com/BenCharbonneau/carpoolic-api)
 
 
 ## The approach taken:

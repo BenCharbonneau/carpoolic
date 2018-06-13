@@ -5,7 +5,8 @@ const remPass = async (reState,e) => {
 	const id = e.currentTarget.id.split('_')
 	const userId = id[0];
 	const rideId = id[1];
-	console.log(rideId,userId,"remove passenger");
+
+	//remove the passenger from the ride and get back any messages
 	const responseJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'rides/'+rideId+'/removeuser/'+userId,{
 		credentials: 'include',
 		method: 'DELETE'
@@ -13,6 +14,7 @@ const remPass = async (reState,e) => {
 
 	const response = await responseJSON.json();
 
+	//refresh the state
 	reState(response);
 }
 

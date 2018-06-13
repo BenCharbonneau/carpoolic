@@ -1,3 +1,7 @@
+.App {
+  text-align: center;
+}
+
 body, html {
   background-color: #f28c2e;
   color: white;
@@ -21,9 +25,55 @@ div, p, input {
   text-transform: none;
 }
 
-.App {
-  text-align: center;
+.bg {
+  background: url("/images/architecture-auto-automobiles-210182.jpg");
+  height: 300px; 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
+
+.transbox {
+  margin: 30px;
+  background-color: rgba(0, 0, 0, .75);
+  border: 1px solid black;
+  color: white;
+  font-size: 4em;
+  padding: 20px;
+  display: inline-block;
+}
+
+.form-alert {
+  color: red;
+  font-size: 10px;
+}
+
+/* Button styling */
+
+.modal-btn {
+  background-color: #f28c2e;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  margin: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.btn {
+  background-color: white;
+  border: none;
+  color: #f28c2e;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+/* Old React styling
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
@@ -50,48 +100,4 @@ div, p, input {
   to { transform: rotate(360deg); }
 }
 
-.modal-btn {
-  background-color: #f28c2e;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  margin: 5px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-}
-
-.btn {
-  background-color: white;
-  border: none;
-  color: #f28c2e;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-}
-
-.bg {
-  background: url("/images/architecture-auto-automobiles-210182.jpg");
-  height: 300px; 
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.transbox {
-  margin: 30px;
-  background-color: rgba(0, 0, 0, .75);
-  border: 1px solid black;
-  color: white;
-  font-size: 4em;
-  padding: 20px;
-  display: inline-block;
-}
-
-.form-alert {
-  color: red;
-  font-size: 10px;
-}
+*/

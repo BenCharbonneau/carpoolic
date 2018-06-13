@@ -4,7 +4,6 @@ import CreateRide from '../CreateRide';
 import Modal from '../Modal';
 import './style.css';
 
-
 class Banner extends Component {
 	constructor() {
 		super();
@@ -14,16 +13,20 @@ class Banner extends Component {
 		}
 	}
 	showModal = () => {
+		//show a modal based on the button the user clicked
 		this.setState({modalClass: 'open'})
 	}
 	hideModal = (response,logout) => {
+		//hide the modal that the user had open
 
+		//logout if the user took an action that should log them out
 		if (logout) {
 			this.props.logout();
 		}
 
 		this.setState({modalClass: 'closed'});
 
+		//show any messages that came from the server
 		this.props.setMess(response);
 
 	}

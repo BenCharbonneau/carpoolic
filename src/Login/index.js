@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './style.css';
 import '../App.css'
 
 class Login extends Component {
@@ -15,6 +14,7 @@ class Login extends Component {
 
     	e.preventDefault();
 
+    	//get the user information from the login/registration form
 		const inputs = e.currentTarget.children;
 		const frmVals = {};
 		let input;
@@ -29,6 +29,7 @@ class Login extends Component {
 			}
 		}
 		
+		//do authentication on the server
 		let login;
 
 		if (!this.state.register) {
@@ -39,6 +40,7 @@ class Login extends Component {
 			login = await this.createUser(frmVals);
 		}
 
+		//If it's not successful, show a message. Otherwise, pass the user to the App state.
 		if(!login.success) {
   			this.setState({ message: login.message});
   		}
@@ -47,6 +49,7 @@ class Login extends Component {
 		}
 	}
 	checkPassword = async (username, password) => {
+		//validate the inputted username and password on the server
 		const loginJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'users/login',{
 			method: "POST",
 			credentials: 'include',
@@ -61,6 +64,7 @@ class Login extends Component {
 		return login
 	}
 	createUser = async (frmVals) => {
+		//register the user on the server
 	  	const registerJSON = await fetch(process.env.REACT_APP_DEV_API_URL+'users/register',{
 	  	  method: "POST",
 	  	  credentials: 'include',
@@ -68,10 +72,11 @@ class Login extends Component {
 	  	});
 
 	  	const register = await registerJSON.json();
-	  	console.log(register, " this is register")
+	  	
 		return register;
 	}
 	flipReg = (register) => {
+		//toggle whether the user is registering or logging in
 		this.setState({ register: !register, message: '' });
 	}
     render() {
@@ -81,6 +86,7 @@ class Login extends Component {
 	  	let inputs;
 	  	let link;
 
+	  	//build the login page or the register page depending on which page the user is on
 	  	if (!register) {
 	  		title = "Login";
 
